@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://static-collective.invalid/free-graph.packet.v0.schema.json",
+  "title": "Free Graph Packet v0",
+  "type": "object",
+  "required": [
+    "schema",
+    "purpose",
+    "modes",
+    "scope",
+    "task_world_cut",
+    "sources",
+    "nodes",
+    "links",
+    "residual_fog",
+    "non_imports"
+  ],
+  "properties": {
+    "schema": {"const": "free-graph.packet/v0"},
+    "packet_id": {"type": "string", "pattern": "^fgp:sha256:[0-9a-f]{64}$"},
+    "purpose": {"type": "string", "minLength": 1},
+    "modes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["re-enter", "metabolize", "prove", "seed"]}},
+    "scope": {
+      "type": "object",
+      "required": ["task", "worlds"],
+      "properties": {
+        "task": {"type": "string", "minLength": 1},
+        "worlds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "as_of": {"type": "string"},
+        "resolution": {"type": "string"},
+        "extensions": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "task_world_cut": {
+      "type": "object",
+      "required": ["status", "selected_ids", "omitted", "rationale"],
+      "properties": {
+        "status": {"enum": ["sufficient", "unresolved", "not-required"]},
+        "selected_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "owner_head_source_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "omitted": {"type": "array", "items": {"type": "object", "required": ["door", "reason"], "properties": {"door": {"type": "string", "minLength": 1}, "reason": {"type": "string", "minLength": 1}}, "additionalProperties": false}},
+        "rationale": {"type": "string", "minLength": 1},
+        "extensions": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}},
+    "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "links": {"type": "array", "items": {"$ref": "#/$defs/link"}},
+    "residual_fog": {"type": "array", "items": {"type": "string"}},
+    "non_imports": {"type": "array", "items": {"type": "string"}},
+    "extensions": {"type": "object"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "authority": {"enum": ["none", "source-local", "owner-local"]},
+    "status": {"enum": ["observed", "proposed", "unresolved", "tested", "supported", "refused", "superseded", "locally-adopted"]},
+    "source": {
+      "type": "object",
+      "required": ["id", "source_class", "locator", "observed_at", "acquisition", "digest", "access", "export", "authority"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^fgs:sha256:[0-9a-f]{64}$"},
+        "source_class": {"enum": ["conversation-witness", "direct-observation", "project-source", "research-source", "graph-packet", "specimen-receipt", "human-witness", "gate-receipt", "world-head", "connector-receipt", "unresolved-receipt"]},
+        "locator": {"type": "object", "required": ["system", "coordinate", "revision", "resolution"], "properties": {"system": {"type": "string", "minLength": 1}, "container": {"type": "string"}, "coordinate": {"type": "string", "minLength": 1}, "revision": {"type": "string", "minLength": 1}, "resolution": {"type": "string", "minLength": 1}, "uri": {"type": "string"}}, "additionalProperties": false},
+        "observed_at": {"type": "string", "minLength": 1},
+        "acquisition": {"type": "string", "minLength": 1},
+        "speaker": {"type": "string"},
+        "excerpt": {"type": "string"},
+        "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "resolvable_pointer": {"type": "string"},
+        "redaction": {"type": "string"},
+        "access": {"enum": ["public", "private", "restricted", "unknown"]},
+        "export": {"enum": ["portable", "pointer-only", "prohibited", "unknown"]},
+        "authority": {"$ref": "#/$defs/authority"},
+        "world_key": {"type": "string", "minLength": 1},
+        "gate_name": {"type": "string", "minLength": 1},
+        "key_id": {"type": "string"},
+        "signature": {"type": "string"},
+        "extensions": {"type": "object"}
+      },
+      "anyOf": [
+        {"required": ["excerpt"]},
+        {"required": ["resolvable_pointer"]},
+        {"required": ["redaction"], "properties": {"access": {"enum": ["private", "restricted"]}, "export": {"enum": ["pointer-only", "prohibited"]}}}
+      ],
+      "additionalProperties": false
+    },
+    "node": {
+      "type": "object",
+      "required": ["id", "kind", "label", "status", "source_ids"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^fgn:sha256:[0-9a-f]{64}$"},
+        "kind": {"enum": ["encounter", "world", "artifact", "claim", "question", "test", "testimony", "receipt"]},
+        "label": {"type": "string", "minLength": 1},
+        "aliases": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "status": {"$ref": "#/$defs/status"},
+        "source_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "world_key": {"type": "string", "minLength": 1},
+        "claim_class": {"enum": ["factual", "inferential", "design", "perceptual", "mathematical", "operational"]},
+        "witness_requirement": {"enum": ["none", "machine", "human", "both", "owner-defined"]},
+        "extensions": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "link": {
+      "type": "object",
+      "required": ["id", "from", "verb", "to", "qualifier", "status", "source_ids", "authority"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^fgl:sha256:[0-9a-f]{64}$"},
+        "from": {"type": "string"},
+        "verb": {"enum": ["connects", "descends-from", "tests", "bears-on", "constitutes"]},
+        "to": {"type": "string"},
+        "qualifier": {"type": "string", "minLength": 1},
+        "status": {"$ref": "#/$defs/status"},
+        "source_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "authority": {"$ref": "#/$defs/authority"},
+        "bearing": {"enum": ["supports", "refuses", "unresolved"]},
+        "owner_world": {"type": "string"},
+        "gate": {"type": "string", "minLength": 1},
+        "outcome": {"enum": ["adopts", "refuses", "defers"]},
+        "receipt_source_id": {"type": "string"},
+        "world_head_source_id": {"type": "string"},
+        "extensions": {"type": "object"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

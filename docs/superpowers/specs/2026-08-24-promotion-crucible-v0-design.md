@@ -165,6 +165,7 @@ Poison results are reported separately as attack outcomes. A poison correctly re
 
 The whole candidate has no score and no aggregate green. The v0 whole verdict is:
 
+- `crucible-refused` if a mandatory vocabulary-leak poison is not refused on every required operational behavior;
 - `portable-candidate` only if every clause independently returns `supports` and all mandatory attacks are caught;
 - otherwise `split-required`.
 
@@ -215,4 +216,3 @@ Repeated runs over the same case must be byte-identical.
 - It does not make projections causally inert.
 - It does not infer behavior from words, declared policy, or receipt shape.
 - It does not close Free Graph issue #2; it consumes that issue's pressure as one local embodiment.
-

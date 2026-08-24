@@ -1,0 +1,110 @@
+{
+  "case_digest": "sha256:23040647510b3f5410844556b805d658671382e6c4f6aa8a1d9b88ecc3dfca40",
+  "conclusion": "The supplied observation does not identify a unique graph. Connectedness is a sufficient one-query discriminator for the supplied pair, and no zero-query discriminator can separate worlds with the same supplied observation.",
+  "failed_discriminator": {
+    "cost": 1,
+    "id": "all-degrees-even",
+    "outputs": {
+      "W_2C3": true,
+      "W_C6": true
+    },
+    "separates": false
+  },
+  "identifiability": "finite-equivalence",
+  "isomorphic": false,
+  "minimum_discriminator": {
+    "cost": 1,
+    "id": "is-connected",
+    "outputs": {
+      "W_2C3": false,
+      "W_C6": true
+    },
+    "separates": true,
+    "zero_query_lower_bound": true
+  },
+  "observation_collision": true,
+  "receipt_schema": "ssw-math.receipt/v0",
+  "reexpression_results": [
+    {
+      "id": "canonical-json",
+      "outputs_equal": true
+    },
+    {
+      "id": "labeled-vector",
+      "outputs_equal": true
+    }
+  ],
+  "scope_limitations": [
+    "This result addresses distinguishability for the supplied pair and data only.",
+    "The one-query minimum is relative to the declared Boolean-predicate cost model."
+  ],
+  "source_lineage": {
+    "base_revision": "5ddac0bd77fa99391b4cbe6afbb9c24d049a40e1",
+    "issue": "https://github.com/the-static-collective/national-treasure/issues/36",
+    "method": "cases/same-state-different-world/TASK-FACTORY.md",
+    "repository": "the-static-collective/national-treasure",
+    "research": {
+      "citation": "David Blackwell, Equivalent Comparisons of Experiments, Annals of Mathematical Statistics 24(2):265-272 (1953)",
+      "doi": "10.1214/aoms/1177729032",
+      "supplied_scan_sha256": "f490b8395187edc34ab46a3d45455f1f59cbbc9632964c63218a2f4c8ba8cd1d",
+      "use": "Conceptual lineage for comparison of experiments and stochastic transformations; the finite graph claim remains independently executable."
+    }
+  },
+  "specimen_id": "SSW-MATH-001",
+  "world_results": {
+    "W_2C3": {
+      "all_degrees_even": true,
+      "component_count": 2,
+      "connected": false,
+      "degree_sequence": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "edge_count": 6,
+      "observation_signature": [
+        6,
+        6,
+        [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "vertex_count": 6
+    },
+    "W_C6": {
+      "all_degrees_even": true,
+      "component_count": 1,
+      "connected": true,
+      "degree_sequence": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "edge_count": 6,
+      "observation_signature": [
+        6,
+        6,
+        [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "vertex_count": 6
+    }
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "case_schema": "promotion-crucible.case/v0",
+  "candidate_id": "no-silent-promotion-five-clause-candidate",
+  "title": "Projection alone cannot silently constitute evidence, authority, or consequence",
+  "promotion_rule": "Frequency is not the threshold. Survival under translation is.",
+  "clauses": {
+    "epistemic": {
+      "statement": "Projection alone does not increase what the underlying evidence identifies.",
+      "semantic_fracture": "No fracture is presently observed between the two independent epistemic embodiments.",
+      "missing_discriminator": "A third native domain could test whether the same compatible-world constraint survives another observation model."
+    },
+    "authority": {
+      "statement": "Projection alone does not increase warrant, permission, or local authority.",
+      "semantic_fracture": "National Treasure's mathematical receipt contains no native warrant or permission transition to test.",
+      "missing_discriminator": "Add a materially different non-Free-Graph consumer whose native authorization model proves a representation cannot unlock an action without a separately attributable local gate."
+    },
+    "consequence": {
+      "statement": "Projection alone does not constitute a consequential state change; any consequence requires an independently named local gate.",
+      "semantic_fracture": "National Treasure's mathematical receipt is observational and contains no native causal state transition or local decision gate.",
+      "missing_discriminator": "Add a materially different consumer that lets representation output participate in a causal path while requiring a separately attributable local decision gate for state change."
+    },
+    "historical": {
+      "statement": "Decoder or lens changes append attributable projections rather than rewriting prior projections.",
+      "semantic_fracture": "National Treasure's founding receipt has one native evaluation history and does not exercise decoder-version succession.",
+      "missing_discriminator": "Add a materially different append-only consumer that preserves old renderings while a versioned decoder emits a newly attributable rendering."
+    },
+    "identity": {
+      "statement": "Representation or lens change does not silently become object or worldline change.",
+      "semantic_fracture": "No fracture is presently observed between the view/object control and the independent two-graph identity witness.",
+      "missing_discriminator": "A third native domain could test view continuity against an explicit object-transform operation."
+    }
+  },
+  "consumers": [
+    {
+      "id": "free-graph-relational-coordinate-v0",
+      "role": "embodiment",
+      "source": {
+        "repository": "the-static-collective/free-graph",
+        "revision": "50f8c5298150f04e7bf08dc29b70e500ccb36880",
+        "path": "docs/relational-coordinate-v0.md"
+      },
+      "materiality": {
+        "repository": "the-static-collective/free-graph",
+        "implementation_family": "free-graph-relational-coordinate-python-v0",
+        "vocabulary_family": "free-graph-projection-constitutional-v0",
+        "receipt_shape": "free-graph.relational-coordinate.receipt/v0"
+      },
+      "declared_policy": {
+        "projectionAuthority": "none",
+        "projectionConsequence": "requires-local-gate"
+      },
+      "traces": {
+        "epistemic": [
+          {
+            "id": "fg-epistemic-reexpression",
+            "projection_event_id": "projection:fg-observation-json-v1",
+            "compatible_worlds_before": ["world:cycle-six", "world:two-triangles"],
+            "compatible_worlds_after": ["world:cycle-six", "world:two-triangles"],
+            "source_ids_before": ["source:shared-degree-observation"],
+            "source_ids_after": ["source:shared-degree-observation"]
+          }
+        ],
+        "authority": [
+          {
+            "id": "fg-lens-no-warrant-rise",
+            "projection_event_id": "projection:fg-math-lens-v1",
+            "effective_warrant_before": "none",
+            "effective_warrant_after": "none",
+            "gate_receipts": []
+          },
+          {
+            "id": "fg-gated-warrant-rise",
+            "projection_event_id": "projection:fg-owner-review-v1",
+            "effective_warrant_before": "none",
+            "effective_warrant_after": "owner-local",
+            "gate_receipts": [
+              {
+                "id": "gate:fg-owner-adoption-001",
+                "owner_world": "world:free-graph-local-test",
+                "decision": "adopt-for-local-test"
+              }
+            ]
+          }
+        ],
+        "consequence": [
+          {
+            "id": "fg-projection-causally-inert-control",
+            "projection_event_id": "projection:fg-topology-lens-v1",
+            "state_before": "candidate",
+            "state_after": "candidate",
+            "gate_receipts": []
+          },
+          {
+            "id": "fg-projection-participates-through-gate",
+            "projection_event_id": "projection:fg-owner-review-v1",
+            "state_before": "candidate",
+            "state_after": "locally-adopted",
+            "gate_receipts": [
+              {
+                "id": "gate:fg-owner-adoption-001",
+                "owner_world": "world:free-graph-local-test",
+                "decision": "adopt-for-local-test"
+              }
+            ]
+          }
+        ],
+        "historical": [
+          {
+            "id": "fg-decoder-append-only",
+            "decoder_changed": true,
+            "prior_projections_before": [
+              {
+                "id": "projection:fg-object-a-math-v1",
+                "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+                "decoder_version": "math-decoder/v1"
+              }
+            ],
+            "prior_projections_after": [
+              {
+                "id": "projection:fg-object-a-math-v1",
+                "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+                "decoder_version": "math-decoder/v1"
+              }
+            ],
+            "new_projections": [
+              {
+                "id": "projection:fg-object-a-math-v2",
+                "content_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+                "decoder_version": "math-decoder/v2",
+                "derived_from_projection_ids": ["projection:fg-object-a-math-v1"]
+              }
+            ]
+          }
+        ],
+        "identity": [
+          {
+            "id": "fg-view-rotate-preserves-identity",
+            "operation_kind": "view",
+            "projection_event_id": "projection:fg-object-a-topology-v1",
+            "object_id_before": "object:fg-a",
+            "object_id_after": "object:fg-a",
+            "worldline_id_before": "worldline:fg-a",
+            "worldline_id_after": "worldline:fg-a",
+            "transform_receipts": []
+          },
+          {
+            "id": "fg-explicit-object-transform",
+            "operation_kind": "object-transform",
+            "projection_event_id": "projection:fg-object-a-transform-view",
+            "object_id_before": "object:fg-a",
+            "object_id_after": "object:fg-b",
+            "worldline_id_before": "worldline:fg-a",
+            "worldline_id_after": "worldline:fg-b",
+            "transform_receipts": [
+              {
+                "id": "transform:fg-object-a-to-b-001",
+                "owner_world": "world:free-graph-local-test",
+                "decision": "rotate-object"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "national-treasure-ssw-math-001",
+      "role": "embodiment",
+      "source": {
+        "repository": "the-static-collective/national-treasure",
+        "revision": "26a6cab21dfeb203350c51e46d18574a9eb68c5f",
+        "path": "cases/same-state-different-world/specimens/ssw-math-001/receipt.json"
+      },
+      "materiality": {
+        "repository": "the-static-collective/national-treasure",
+        "implementation_family": "national-treasure-ssw-graph-verifier-v0",
+        "vocabulary_family": "finite-graph-identifiability-v0",
+        "receipt_shape": "ssw-math.receipt/v0"
+      },
+      "native_receipt": {
+        "path": "national-treasure-ssw-math-001.receipt.json",
+        "sha256": "45ae6d1ff7fb29358320ff637d53a3594422d60d68ace7aa4546fc25ecbfb447",
+        "adapter": "ssw-math-001/v0",
+        "clauses": ["epistemic", "identity"]
+      }
+    },
+    {
+      "id": "poison-copied-nouns-reversed-behavior",
+      "role": "poison",
+      "source": {
+        "repository": "adversarial-fixture/no-free-graph-imports",
+        "revision": "fixture-v0",
+        "path": "specimens/promotion-crucible-v0/poison_consumer.py"
+      },
+      "materiality": {
+        "repository": "adversarial-fixture/no-free-graph-imports",
+        "implementation_family": "standalone-reversed-behavior-fixture-v0",
+        "vocabulary_family": "free-graph-projection-constitutional-v0",
+        "receipt_shape": "free-graph.relational-coordinate.receipt/v0"
+      },
+      "imports": [],
+      "declared_policy": {
+        "projectionAuthority": "none",
+        "projectionConsequence": "requires-local-gate"
+      },
+      "mandatory_attack": {
+        "must_refuse": ["authority", "consequence"]
+      },
+      "native_receipt": {
+        "path": "poison-receipt.json",
+        "sha256": "3b054675a57ea2a4329d799d9e352e50cc61d112dc3383bd584106b3af5abaab",
+        "adapter": "copied-projection-poison/v0",
+        "clauses": ["authority", "consequence"]
+      }
+    }
+  ],
+  "expected": {
+    "clauses": {
+      "epistemic": "supports",
+      "authority": "only-one-domain",
+      "consequence": "only-one-domain",
+      "historical": "only-one-domain",
+      "identity": "supports"
+    },
+    "whole": "split-required",
+    "mandatory_attack": "caught"
+  }
+}

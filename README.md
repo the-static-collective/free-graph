@@ -60,6 +60,15 @@ Run the contract tests:
 python3 -m unittest discover -s tests -v
 ```
 
+Run the Promotion/Invariance Crucible:
+
+```bash
+python3 scripts/promotion_crucible.py \
+  specimens/promotion-crucible-v0/case.json
+```
+
+The founding two-repository result is intentionally `split-required`; see [`docs/promotion-crucible-v0.md`](docs/promotion-crucible-v0.md).
+
 ## Public/private source boundary
 
 A packet may preserve a private or restricted source as a digest-only redacted record when the source is non-portable (`pointer-only` or `prohibited`). This repo never requires publishing private excerpts merely to preserve provenance.

@@ -1,0 +1,346 @@
+{
+  "aggregate_score": null,
+  "aggregation_policy": "forbidden; clause verdicts are not averaged",
+  "attacks": [
+    {
+      "consumer_id": "poison-copied-nouns-reversed-behavior",
+      "copied_receipt_shape": "free-graph.relational-coordinate.receipt/v0",
+      "copied_vocabulary_family": "free-graph-projection-constitutional-v0",
+      "declared_policy_consulted": false,
+      "missing_refusals": [],
+      "observed_refusals": [
+        "authority",
+        "consequence"
+      ],
+      "outcome": "caught",
+      "required_refusals": [
+        "authority",
+        "consequence"
+      ]
+    }
+  ],
+  "candidate_id": "no-silent-promotion-five-clause-candidate",
+  "candidate_law_is_conjunction": true,
+  "case_digest": "sha256:92c26983c8435ace414fcbcafd856c74a7ea8b84864caa9aa58bc6fc153166a0",
+  "clauses": {
+    "authority": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0"
+      ],
+      "missing_discriminator": "Add a materially different non-Free-Graph consumer whose native authorization model proves a representation cannot unlock an action without a separately attributable local gate.",
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": "National Treasure's mathematical receipt contains no native warrant or permission transition to test.",
+      "statement": "Projection alone does not increase warrant, permission, or local authority.",
+      "verdict": "only-one-domain"
+    },
+    "consequence": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0"
+      ],
+      "missing_discriminator": "Add a materially different consumer that lets representation output participate in a causal path while requiring a separately attributable local decision gate for state change.",
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": "National Treasure's mathematical receipt is observational and contains no native causal state transition or local decision gate.",
+      "statement": "Projection alone does not constitute a consequential state change; any consequence requires an independently named local gate.",
+      "verdict": "only-one-domain"
+    },
+    "epistemic": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0",
+        "national-treasure-ssw-math-001"
+      ],
+      "missing_discriminator": null,
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": null,
+      "statement": "Projection alone does not increase what the underlying evidence identifies.",
+      "verdict": "supports"
+    },
+    "historical": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0"
+      ],
+      "missing_discriminator": "Add a materially different append-only consumer that preserves old renderings while a versioned decoder emits a newly attributable rendering.",
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": "National Treasure's founding receipt has one native evaluation history and does not exercise decoder-version succession.",
+      "statement": "Decoder or lens changes append attributable projections rather than rewriting prior projections.",
+      "verdict": "only-one-domain"
+    },
+    "identity": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0",
+        "national-treasure-ssw-math-001"
+      ],
+      "missing_discriminator": null,
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": null,
+      "statement": "Representation or lens change does not silently become object or worldline change.",
+      "verdict": "supports"
+    }
+  },
+  "consumer_results": [
+    {
+      "clauses": {
+        "authority": {
+          "status": "satisfies",
+          "trace_count": 2,
+          "traces": [
+            {
+              "id": "fg-lens-no-warrant-rise",
+              "observations": [
+                "projection left effective warrant and permission unchanged"
+              ],
+              "status": "satisfies"
+            },
+            {
+              "id": "fg-gated-warrant-rise",
+              "observations": [
+                "effective warrant or permission rose only through a separately attributable local gate"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "consequence": {
+          "status": "satisfies",
+          "trace_count": 2,
+          "traces": [
+            {
+              "id": "fg-projection-causally-inert-control",
+              "observations": [
+                "projection did not itself constitute a consequential state change"
+              ],
+              "status": "satisfies"
+            },
+            {
+              "id": "fg-projection-participates-through-gate",
+              "observations": [
+                "projection participated in a causal path whose state change is attributed to a separate local gate"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "epistemic": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "fg-epistemic-reexpression",
+              "observations": [
+                "compatible worlds remained unchanged under re-expression"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "historical": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "fg-decoder-append-only",
+              "observations": [
+                "decoder change appended newly identified and attributed projection output",
+                "all prior projection identifiers and content remained byte-stable"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "identity": {
+          "status": "satisfies",
+          "trace_count": 2,
+          "traces": [
+            {
+              "id": "fg-view-rotate-preserves-identity",
+              "observations": [
+                "view or no-op preserved object and worldline identity"
+              ],
+              "status": "satisfies"
+            },
+            {
+              "id": "fg-explicit-object-transform",
+              "observations": [
+                "identity change is attributed to an explicit object transform"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        }
+      },
+      "declared_policy": {
+        "projectionAuthority": "none",
+        "projectionConsequence": "requires-local-gate"
+      },
+      "declared_policy_consulted": false,
+      "id": "free-graph-relational-coordinate-v0",
+      "materiality": {
+        "implementation_family": "free-graph-relational-coordinate-python-v0",
+        "receipt_shape": "free-graph.relational-coordinate.receipt/v0",
+        "repository": "the-static-collective/free-graph",
+        "vocabulary_family": "free-graph-projection-constitutional-v0"
+      },
+      "role": "embodiment",
+      "source": {
+        "path": "docs/relational-coordinate-v0.md",
+        "repository": "the-static-collective/free-graph",
+        "revision": "50f8c5298150f04e7bf08dc29b70e500ccb36880"
+      }
+    },
+    {
+      "clauses": {
+        "authority": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "consequence": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "epistemic": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:ssw-math-001:observation-collision",
+              "observations": [
+                "native observation collision and deterministic re-expressions preserve the same candidate graph worlds"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "historical": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "identity": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:ssw-math-001:distinct-graph-worlds",
+              "observations": [
+                "native receipt preserves two non-isomorphic graph identities despite their equal supplied observation"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        }
+      },
+      "declared_policy": null,
+      "declared_policy_consulted": false,
+      "id": "national-treasure-ssw-math-001",
+      "materiality": {
+        "implementation_family": "national-treasure-ssw-graph-verifier-v0",
+        "receipt_shape": "ssw-math.receipt/v0",
+        "repository": "the-static-collective/national-treasure",
+        "vocabulary_family": "finite-graph-identifiability-v0"
+      },
+      "role": "embodiment",
+      "source": {
+        "path": "cases/same-state-different-world/specimens/ssw-math-001/receipt.json",
+        "repository": "the-static-collective/national-treasure",
+        "revision": "26a6cab21dfeb203350c51e46d18574a9eb68c5f"
+      }
+    },
+    {
+      "clauses": {
+        "authority": {
+          "status": "refuses",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:poison:authority",
+              "observations": [
+                "effective warrant or permission rose without a separately attributable local gate"
+              ],
+              "status": "refuses"
+            }
+          ]
+        },
+        "consequence": {
+          "status": "refuses",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:poison:consequence",
+              "observations": [
+                "consequential state changed without a separately attributable local gate"
+              ],
+              "status": "refuses"
+            }
+          ]
+        },
+        "epistemic": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "historical": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "identity": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        }
+      },
+      "declared_policy": {
+        "projectionAuthority": "none",
+        "projectionConsequence": "requires-local-gate"
+      },
+      "declared_policy_consulted": false,
+      "id": "poison-copied-nouns-reversed-behavior",
+      "materiality": {
+        "implementation_family": "standalone-reversed-behavior-fixture-v0",
+        "receipt_shape": "free-graph.relational-coordinate.receipt/v0",
+        "repository": "adversarial-fixture/no-free-graph-imports",
+        "vocabulary_family": "free-graph-projection-constitutional-v0"
+      },
+      "role": "poison",
+      "source": {
+        "path": "specimens/promotion-crucible-v0/poison_consumer.py",
+        "repository": "adversarial-fixture/no-free-graph-imports",
+        "revision": "fixture-v0"
+      }
+    }
+  ],
+  "promotion_rule": "Frequency is not the threshold. Survival under translation is.",
+  "receipt_schema": "promotion-crucible.receipt/v0",
+  "source_pins": [
+    {
+      "consumer_id": "free-graph-relational-coordinate-v0",
+      "path": "docs/relational-coordinate-v0.md",
+      "repository": "the-static-collective/free-graph",
+      "revision": "50f8c5298150f04e7bf08dc29b70e500ccb36880"
+    },
+    {
+      "consumer_id": "national-treasure-ssw-math-001",
+      "native_receipt_sha256": "45ae6d1ff7fb29358320ff637d53a3594422d60d68ace7aa4546fc25ecbfb447",
+      "path": "cases/same-state-different-world/specimens/ssw-math-001/receipt.json",
+      "repository": "the-static-collective/national-treasure",
+      "revision": "26a6cab21dfeb203350c51e46d18574a9eb68c5f"
+    },
+    {
+      "consumer_id": "poison-copied-nouns-reversed-behavior",
+      "native_receipt_sha256": "3b054675a57ea2a4329d799d9e352e50cc61d112dc3383bd584106b3af5abaab",
+      "path": "specimens/promotion-crucible-v0/poison_consumer.py",
+      "repository": "adversarial-fixture/no-free-graph-imports",
+      "revision": "fixture-v0"
+    }
+  ],
+  "whole": {
+    "reason": "the candidate conjunction contains clauses that have not independently survived translation",
+    "verdict": "split-required"
+  }
+}

@@ -1,0 +1,497 @@
+{
+  "aggregate_score": null,
+  "aggregation_policy": "forbidden; clause verdicts are not averaged",
+  "attacks": [
+    {
+      "consumer_id": "poison-copied-nouns-reversed-behavior",
+      "copied_receipt_shape": "free-graph.relational-coordinate.receipt/v0",
+      "copied_vocabulary_family": "free-graph-projection-constitutional-v0",
+      "declared_policy_consulted": false,
+      "missing_refusals": [],
+      "observed_refusals": [
+        "authority",
+        "consequence"
+      ],
+      "outcome": "caught",
+      "required_refusals": [
+        "authority",
+        "consequence"
+      ]
+    }
+  ],
+  "candidate_id": "no-silent-promotion-five-clause-candidate",
+  "candidate_law_is_conjunction": true,
+  "case_digest": "sha256:d97b1102dae7217d61d4f86f50d296e3f6b1e03dfff2b636417c9680f42cbc0f",
+  "clauses": {
+    "authority": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0",
+        "full-bowl-002-repaired-world"
+      ],
+      "missing_discriminator": null,
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": null,
+      "statement": "Projection alone does not increase warrant, permission, or local authority.",
+      "verdict": "supports"
+    },
+    "consequence": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0"
+      ],
+      "missing_discriminator": "Find an existing unrelated system whose native receipt preserves both sides of the same causal chain: representation may inform the system, while a separately attributable decision or commit event demonstrably owns the actual state transition.",
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": "Full Bowl 002 exposes ordered local-authority, attempt, and outcome phases, but FB001-U001 explicitly withholds the genuine warrant and terminal receipt required for same-specimen causal reconciliation. Treating the phase silhouette alone as completed causal proof would silently upgrade its native unresolved state.",
+      "statement": "Projection alone does not constitute a consequential state change; any consequence requires an independently named local gate.",
+      "verdict": "only-one-domain"
+    },
+    "epistemic": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0",
+        "national-treasure-ssw-math-001"
+      ],
+      "missing_discriminator": null,
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": null,
+      "statement": "Projection alone does not increase what the underlying evidence identifies.",
+      "verdict": "supports"
+    },
+    "historical": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0"
+      ],
+      "missing_discriminator": "Find an existing unrelated system with separately addressable old and new renderings of the same source under two interpreter, renderer, or decoder versions, plus native attribution from the new derivation to its prior rendering.",
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": "National Treasure and both Full Bowl receipts lack a native decoder-version succession with an explicit derivation edge. Haunted Toaster separately preserves replayable rasters and immutable receipt bytes, but its existing artifacts do not pair old and new renderings of the same source under two renderer versions.",
+      "statement": "Decoder or lens changes append attributable projections rather than rewriting prior projections.",
+      "verdict": "only-one-domain"
+    },
+    "identity": {
+      "independent_supports": [
+        "free-graph-relational-coordinate-v0",
+        "national-treasure-ssw-math-001"
+      ],
+      "missing_discriminator": null,
+      "nonindependent_supports": [],
+      "refusing_embodiments": [],
+      "semantic_fracture": null,
+      "statement": "Representation or lens change does not silently become object or worldline change.",
+      "verdict": "supports"
+    }
+  },
+  "consumer_results": [
+    {
+      "clauses": {
+        "authority": {
+          "status": "satisfies",
+          "trace_count": 2,
+          "traces": [
+            {
+              "id": "fg-lens-no-warrant-rise",
+              "observations": [
+                "projection left effective warrant and permission unchanged"
+              ],
+              "status": "satisfies"
+            },
+            {
+              "id": "fg-gated-warrant-rise",
+              "observations": [
+                "effective warrant or permission rose only through a separately attributable local gate"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "consequence": {
+          "status": "satisfies",
+          "trace_count": 2,
+          "traces": [
+            {
+              "id": "fg-projection-causally-inert-control",
+              "observations": [
+                "projection did not itself constitute a consequential state change"
+              ],
+              "status": "satisfies"
+            },
+            {
+              "id": "fg-projection-participates-through-gate",
+              "observations": [
+                "projection participated in a causal path whose state change is attributed to a separate local gate"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "epistemic": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "fg-epistemic-reexpression",
+              "observations": [
+                "compatible worlds remained unchanged under re-expression"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "historical": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "fg-decoder-append-only",
+              "observations": [
+                "decoder change appended newly identified and attributed projection output",
+                "all prior projection identifiers and content remained byte-stable"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "identity": {
+          "status": "satisfies",
+          "trace_count": 2,
+          "traces": [
+            {
+              "id": "fg-view-rotate-preserves-identity",
+              "observations": [
+                "view or no-op preserved object and worldline identity"
+              ],
+              "status": "satisfies"
+            },
+            {
+              "id": "fg-explicit-object-transform",
+              "observations": [
+                "identity change is attributed to an explicit object transform"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        }
+      },
+      "declared_policy": {
+        "projectionAuthority": "none",
+        "projectionConsequence": "requires-local-gate"
+      },
+      "declared_policy_consulted": false,
+      "id": "free-graph-relational-coordinate-v0",
+      "materiality": {
+        "implementation_family": "free-graph-relational-coordinate-python-v0",
+        "receipt_shape": "free-graph.relational-coordinate.receipt/v0",
+        "repository": "the-static-collective/free-graph",
+        "vocabulary_family": "free-graph-projection-constitutional-v0"
+      },
+      "role": "embodiment",
+      "source": {
+        "path": "docs/relational-coordinate-v0.md",
+        "repository": "the-static-collective/free-graph",
+        "revision": "50f8c5298150f04e7bf08dc29b70e500ccb36880"
+      }
+    },
+    {
+      "clauses": {
+        "authority": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "consequence": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "epistemic": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:ssw-math-001:observation-collision",
+              "observations": [
+                "native observation collision and deterministic re-expressions preserve the same candidate graph worlds"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "historical": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "identity": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:ssw-math-001:distinct-graph-worlds",
+              "observations": [
+                "native receipt preserves two non-isomorphic graph identities despite their equal supplied observation"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        }
+      },
+      "declared_policy": null,
+      "declared_policy_consulted": false,
+      "id": "national-treasure-ssw-math-001",
+      "materiality": {
+        "implementation_family": "national-treasure-ssw-graph-verifier-v0",
+        "receipt_shape": "ssw-math.receipt/v0",
+        "repository": "the-static-collective/national-treasure",
+        "vocabulary_family": "finite-graph-identifiability-v0"
+      },
+      "role": "embodiment",
+      "source": {
+        "path": "cases/same-state-different-world/specimens/ssw-math-001/receipt.json",
+        "repository": "the-static-collective/national-treasure",
+        "revision": "65e67062a3be933332db36af8bc095fc9b2660b4"
+      }
+    },
+    {
+      "clauses": {
+        "authority": {
+          "status": "unresolved",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:full-bowl-001:authority",
+              "observations": [
+                "native caller-authority and reachability attacks are refused, but FB001-L002 leaves the local-authority phase externally compressed"
+              ],
+              "status": "unresolved"
+            }
+          ]
+        },
+        "consequence": {
+          "status": "unresolved",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:full-bowl-001:consequence",
+              "observations": [
+                "native completed output is visible, but FB001-L002 and FB001-U001 withhold the separately reconstructible local-authority, attempt, and terminal lineage needed to attribute the consequence gate"
+              ],
+              "status": "unresolved"
+            }
+          ]
+        },
+        "epistemic": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "historical": {
+          "status": "unresolved",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:full-bowl-001:historical",
+              "observations": [
+                "native receipt distinguishes visible return from changed history but contains no decoder-version succession or derived rendering append"
+              ],
+              "status": "unresolved"
+            }
+          ]
+        },
+        "identity": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        }
+      },
+      "declared_policy": null,
+      "declared_policy_consulted": false,
+      "id": "full-bowl-001-original",
+      "materiality": {
+        "implementation_family": "full-bowl-cross-repository-node-v0",
+        "receipt_shape": "static-collective/full-bowl-001-live-witness-summary/v0",
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "vocabulary_family": "attributable-becoming-crossings-v0"
+      },
+      "role": "embodiment",
+      "source": {
+        "path": "receipts/full-bowl-001/live-witness.json",
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940"
+      }
+    },
+    {
+      "clauses": {
+        "authority": {
+          "status": "satisfies",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:full-bowl-002:authority",
+              "observations": [
+                "native encounter admission is followed by a distinct local ACTION_WARRANT_ADMITTED phase before the attempt becomes admitted"
+              ],
+              "status": "satisfies"
+            }
+          ]
+        },
+        "consequence": {
+          "status": "unresolved",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:full-bowl-002:consequence",
+              "observations": [
+                "native ordered phases show local authorization before the completed outcome, but FB001-U001 explicitly withholds the genuine warrant and terminal receipt needed for same-specimen causal reconciliation"
+              ],
+              "status": "unresolved"
+            }
+          ]
+        },
+        "epistemic": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "historical": {
+          "status": "unresolved",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:full-bowl-002:historical",
+              "observations": [
+                "native rerun preserves the earlier witness as history but does not identify a decoder version or an attributable derived rendering edge"
+              ],
+              "status": "unresolved"
+            }
+          ]
+        },
+        "identity": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        }
+      },
+      "declared_policy": null,
+      "declared_policy_consulted": false,
+      "id": "full-bowl-002-repaired-world",
+      "materiality": {
+        "implementation_family": "full-bowl-cross-repository-node-v0",
+        "receipt_shape": "static-collective/full-bowl-002-repair-rerun/v0",
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "vocabulary_family": "attributable-becoming-crossings-v0"
+      },
+      "role": "embodiment",
+      "source": {
+        "path": "receipts/full-bowl-002/live-witness.json",
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940"
+      }
+    },
+    {
+      "clauses": {
+        "authority": {
+          "status": "refuses",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:poison:authority",
+              "observations": [
+                "effective warrant or permission rose without a separately attributable local gate"
+              ],
+              "status": "refuses"
+            }
+          ]
+        },
+        "consequence": {
+          "status": "refuses",
+          "trace_count": 1,
+          "traces": [
+            {
+              "id": "native:poison:consequence",
+              "observations": [
+                "consequential state changed without a separately attributable local gate"
+              ],
+              "status": "refuses"
+            }
+          ]
+        },
+        "epistemic": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "historical": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        },
+        "identity": {
+          "status": "not-tested",
+          "trace_count": 0,
+          "traces": []
+        }
+      },
+      "declared_policy": {
+        "projectionAuthority": "none",
+        "projectionConsequence": "requires-local-gate"
+      },
+      "declared_policy_consulted": false,
+      "id": "poison-copied-nouns-reversed-behavior",
+      "materiality": {
+        "implementation_family": "standalone-reversed-behavior-fixture-v0",
+        "receipt_shape": "free-graph.relational-coordinate.receipt/v0",
+        "repository": "adversarial-fixture/no-free-graph-imports",
+        "vocabulary_family": "free-graph-projection-constitutional-v0"
+      },
+      "role": "poison",
+      "source": {
+        "path": "specimens/promotion-crucible-v0/poison_consumer.py",
+        "repository": "adversarial-fixture/no-free-graph-imports",
+        "revision": "fixture-v0"
+      }
+    }
+  ],
+  "promotion_rule": "Frequency is not the threshold. Survival under translation is.",
+  "receipt_schema": "promotion-crucible.receipt/v0",
+  "source_pins": [
+    {
+      "consumer_id": "free-graph-relational-coordinate-v0",
+      "path": "docs/relational-coordinate-v0.md",
+      "repository": "the-static-collective/free-graph",
+      "revision": "50f8c5298150f04e7bf08dc29b70e500ccb36880"
+    },
+    {
+      "consumer_id": "national-treasure-ssw-math-001",
+      "native_receipt_sha256": "45ae6d1ff7fb29358320ff637d53a3594422d60d68ace7aa4546fc25ecbfb447",
+      "path": "cases/same-state-different-world/specimens/ssw-math-001/receipt.json",
+      "repository": "the-static-collective/national-treasure",
+      "revision": "65e67062a3be933332db36af8bc095fc9b2660b4"
+    },
+    {
+      "consumer_id": "full-bowl-001-original",
+      "native_receipt_sha256": "55d6431b7e5acd03bb5bf05f17e7dd4e3e5227803fdc5e54a941470b68c17199",
+      "path": "receipts/full-bowl-001/live-witness.json",
+      "repository": "the-static-collective/What-is-the-static-collective-",
+      "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940"
+    },
+    {
+      "consumer_id": "full-bowl-002-repaired-world",
+      "native_receipt_sha256": "25f8b0f4f45ffc1be652f56da6d46da450742ab4c23b6ec847548c90a17c50ee",
+      "path": "receipts/full-bowl-002/live-witness.json",
+      "repository": "the-static-collective/What-is-the-static-collective-",
+      "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940"
+    },
+    {
+      "consumer_id": "poison-copied-nouns-reversed-behavior",
+      "native_receipt_sha256": "3b054675a57ea2a4329d799d9e352e50cc61d112dc3383bd584106b3af5abaab",
+      "path": "specimens/promotion-crucible-v0/poison_consumer.py",
+      "repository": "adversarial-fixture/no-free-graph-imports",
+      "revision": "fixture-v0"
+    }
+  ],
+  "whole": {
+    "reason": "the candidate conjunction contains clauses that have not independently survived translation",
+    "verdict": "split-required"
+  }
+}

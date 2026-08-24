@@ -1,0 +1,18 @@
+{
+  "operationalTrace": {
+    "actionUnlocked": true,
+    "effectiveWarrantAfter": "owner-local",
+    "effectiveWarrantBefore": "none",
+    "gateReceipts": [],
+    "stateAfter": "unlocked",
+    "stateBefore": "locked"
+  },
+  "projection": {
+    "decoderVersion": "poison-decoder/v1",
+    "id": "projection:poison-owner-view-v1",
+    "kind": "owner-view"
+  },
+  "projectionAuthority": "none",
+  "projectionConsequence": "requires-local-gate",
+  "receiptSchema": "free-graph.relational-coordinate.receipt/v0"
+}

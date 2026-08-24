@@ -1,0 +1,116 @@
+{
+  "schema": "static-collective/full-bowl-002-repair-rerun/v0",
+  "specimen": "Black Glass Seed 001",
+  "hostileParticipant": "MADDCL0WN",
+  "purpose": "Re-run the unchanged hostile Full Bowl 001 specimen against the two independently repaired seams without changing authority ownership.",
+  "taskWorldCut": {
+    "integrationBase": "36abc47cf288e839a93fb17a7b4f4fa163cd148a",
+    "project0": "061b9a6e1c9314f7fb43dbb0026059211ed19f0d",
+    "corpusOs": "289c6fa04d04a2bde6dffbe7265903db5bec56c0",
+    "tranchNode": "91f7f96805d4e868e35b8d0c75dc5f0671cb494a"
+  },
+  "status": "survives-repaired-seams",
+  "baselineCrossings": {
+    "passed": 10,
+    "total": 10,
+    "oldRefusalsPreserved": true
+  },
+  "repairClosures": [
+    {
+      "id": "FB001-L001",
+      "status": "closed",
+      "owner": "integration",
+      "evidence": {
+        "cleanBinding": "bound",
+        "cleanAdmission": "admitted",
+        "detachedProject0ExitCode": 1,
+        "detachedProject0Reason": "ENCOUNTER_ADDRESS_MISMATCH",
+        "detachedBinding": "refused",
+        "detachedCorpusInvocations": 0,
+        "authorityTransfer": "none"
+      }
+    },
+    {
+      "id": "FB001-L002",
+      "status": "closed",
+      "owner": "Corpus OS",
+      "evidence": {
+        "phases": [
+          {
+            "phase": "destination-admission",
+            "disposition": "admitted",
+            "reasonCode": "CORPUS_DESTINATION_ADMITTED",
+            "evidenceRefs": [
+              "enc-aaa7b44323865f6b95ecaa774c48ab8e40b1b41fc851b0ebce2824f16d74088a"
+            ],
+            "authorityTransfer": "none"
+          },
+          {
+            "phase": "local-authority",
+            "disposition": "admitted",
+            "reasonCode": "ACTION_WARRANT_ADMITTED",
+            "evidenceRefs": [
+              "fixtures/trusts/casework.synthetic.json"
+            ],
+            "authorityTransfer": "none"
+          },
+          {
+            "phase": "attempt",
+            "disposition": "admitted",
+            "reasonCode": "ACTION_WARRANT_EXECUTED",
+            "evidenceRefs": [
+              "fixtures/capabilities/synthetic.echo.json",
+              "corpus-particular:ring_6"
+            ],
+            "authorityTransfer": "none"
+          },
+          {
+            "phase": "outcome",
+            "disposition": "completed",
+            "reasonCode": "CORPUS_ENCOUNTER_COMPLETED",
+            "evidenceRefs": [
+              "fixtures/capabilities/synthetic.echo.json",
+              "corpus-particular:ring_6",
+              "session-output:session-request-0001"
+            ],
+            "authorityTransfer": "none"
+          }
+        ],
+        "authorityTransfer": "none"
+      }
+    }
+  ],
+  "legacyDetectorObservations": {
+    "ids": [
+      "FB001-L001",
+      "FB001-L002"
+    ],
+    "interpretation": [
+      "FB001-L001 remains observable only when the historical probe deliberately bypasses the new integration-owned binding guard and invokes Corpus directly; the repaired crossing verdict is the guard closure above.",
+      "FB001-L002 remains observable to the historical detector because that detector searched for four proposed top-level field names; Corpus chose the narrower ordered inert phases[] surface, verified above."
+    ]
+  },
+  "residualUnresolved": [
+    {
+      "id": "FB001-U001",
+      "crossingId": "FB001-X06",
+      "statement": "The stdio boundary does not expose the genuine warrant and terminal receipt needed to run same-specimen causal reconciliation; owner causal tests are green, but the Full Bowl binding remains unresolved."
+    },
+    {
+      "id": "FB001-U002",
+      "crossingId": "FB001-X10",
+      "statement": "The boundary correctly refuses a copied warrant; no genuine new unspent local warrant is exported, so positive post-return reachability is deliberately unclaimed."
+    }
+  ],
+  "hostilePromotions": 0,
+  "authority": "none",
+  "legalValidity": "unclaimed",
+  "nonClaims": [
+    "No universal schema is proposed.",
+    "No authority model is merged.",
+    "No shared runtime is introduced.",
+    "No DDD or Full Measure implementation is begun.",
+    "MADDCL0WN material is never authority by transport.",
+    "A fixture-backed projection is not relabeled as an owner-runtime receipt."
+  ]
+}

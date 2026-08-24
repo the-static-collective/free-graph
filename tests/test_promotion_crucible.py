@@ -1,4 +1,5 @@
 import copy
+import hashlib
 import importlib.util
 import json
 import pathlib
@@ -38,6 +39,54 @@ def has_score_key(value):
     if isinstance(value, list):
         return any(has_score_key(item) for item in value)
     return False
+
+
+def full_bowl_consumers():
+    materiality = {
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "implementation_family": "full-bowl-cross-repository-node-v0",
+        "vocabulary_family": "attributable-becoming-crossings-v0",
+    }
+    return [
+        {
+            "id": "full-bowl-001-original",
+            "role": "embodiment",
+            "source": {
+                "repository": "the-static-collective/What-is-the-static-collective-",
+                "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940",
+                "path": "receipts/full-bowl-001/live-witness.json",
+            },
+            "materiality": {
+                **materiality,
+                "receipt_shape": "static-collective/full-bowl-001-live-witness-summary/v0",
+            },
+            "native_receipt": {
+                "path": "full-bowl-001.live-witness.json",
+                "sha256": "55d6431b7e5acd03bb5bf05f17e7dd4e3e5227803fdc5e54a941470b68c17199",
+                "adapter": "full-bowl-001/v0",
+                "clauses": ["authority", "consequence", "historical"],
+            },
+        },
+        {
+            "id": "full-bowl-002-repaired-world",
+            "role": "embodiment",
+            "source": {
+                "repository": "the-static-collective/What-is-the-static-collective-",
+                "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940",
+                "path": "receipts/full-bowl-002/live-witness.json",
+            },
+            "materiality": {
+                **materiality,
+                "receipt_shape": "static-collective/full-bowl-002-repair-rerun/v0",
+            },
+            "native_receipt": {
+                "path": "full-bowl-002.live-witness.json",
+                "sha256": "25f8b0f4f45ffc1be652f56da6d46da450742ab4c23b6ec847548c90a17c50ee",
+                "adapter": "full-bowl-002/v0",
+                "clauses": ["authority", "consequence", "historical"],
+            },
+        },
+    ]
 
 
 class PromotionCrucibleTests(unittest.TestCase):
@@ -113,7 +162,10 @@ class PromotionCrucibleTests(unittest.TestCase):
         self.assertEqual(["authority", "consequence"], attack["observed_refusals"])
 
         case = copy.deepcopy(self.case)
-        poison = case["consumers"][2]
+        poison = next(
+            item for item in case["consumers"]
+            if item["id"] == "poison-copied-nouns-reversed-behavior"
+        )
         poison["declared_policy"] = {
             "projectionAuthority": "absolutely-none",
             "projectionConsequence": "absolutely-gated",
@@ -173,22 +225,135 @@ class PromotionCrucibleTests(unittest.TestCase):
         for word in ("projection", "authority", "constitutes", "gate"):
             self.assertNotIn(word, native)
 
+    def test_case_input_rejects_verdict_ground_truth(self):
+        case = copy.deepcopy(self.case)
+        case.pop("expected", None)
+        injected = [
+            ("top-level expected", lambda item: item.update({"expected": {"whole": "portable-candidate"}})),
+            ("top-level verdict", lambda item: item.update({"verdict": "portable-candidate"})),
+            (
+                "nested expected verdict",
+                lambda item: item["clauses"]["authority"].update({"expected_verdict": "supports"}),
+            ),
+        ]
+        for label, inject in injected:
+            with self.subTest(label=label):
+                poisoned = copy.deepcopy(case)
+                inject(poisoned)
+                with self.assertRaisesRegex(ValueError, "verdict ground truth"):
+                    self.evaluate(poisoned)
+
+    def test_clause_verdicts_move_when_observed_behavior_moves(self):
+        case = copy.deepcopy(self.case)
+        case.pop("expected", None)
+
+        baseline = self.evaluate(case)
+        self.assertEqual("supports", baseline["clauses"]["epistemic"]["verdict"])
+
+        no_second_domain = copy.deepcopy(case)
+        no_second_domain["consumers"][1]["native_receipt"]["clauses"] = []
+        thinned = self.evaluate(no_second_domain)
+        self.assertEqual("only-one-domain", thinned["clauses"]["epistemic"]["verdict"])
+
+        refusing_behavior = copy.deepcopy(case)
+        trace = refusing_behavior["consumers"][0]["traces"]["epistemic"][0]
+        trace["compatible_worlds_after"] = ["world:cycle-six"]
+        refused = self.evaluate(refusing_behavior)
+        self.assertEqual("refuses", refused["clauses"]["epistemic"]["verdict"])
+
+    def test_existing_full_bowl_receipts_preserve_the_native_fracture(self):
+        case = copy.deepcopy(self.case)
+        try:
+            receipt = self.evaluate(case)
+        except ValueError as error:
+            self.fail(f"the crucible must evaluate the pinned native Full Bowl receipts: {error}")
+        by_id = {item["id"]: item for item in receipt["consumer_results"]}
+
+        bowl_001 = by_id["full-bowl-001-original"]
+        self.assertEqual("unresolved", bowl_001["clauses"]["authority"]["status"])
+        self.assertEqual("unresolved", bowl_001["clauses"]["consequence"]["status"])
+        self.assertEqual("unresolved", bowl_001["clauses"]["historical"]["status"])
+
+        bowl_002 = by_id["full-bowl-002-repaired-world"]
+        self.assertEqual("satisfies", bowl_002["clauses"]["authority"]["status"])
+        self.assertEqual("unresolved", bowl_002["clauses"]["consequence"]["status"])
+        self.assertEqual("unresolved", bowl_002["clauses"]["historical"]["status"])
+
+        self.assertEqual("supports", receipt["clauses"]["authority"]["verdict"])
+        self.assertEqual("only-one-domain", receipt["clauses"]["consequence"]["verdict"])
+        self.assertEqual("only-one-domain", receipt["clauses"]["historical"]["verdict"])
+        self.assertEqual("split-required", receipt["whole"]["verdict"])
+
+    def test_full_bowl_phase_behavior_needs_native_owner_attribution(self):
+        crucible = load_crucible()
+        native = json.loads((CASE_PATH.parent / "full-bowl-002.live-witness.json").read_text(encoding="utf-8"))
+        native["status"] = "declaration-does-not-decide"
+        native["purpose"] = "copied words cannot replace behavior"
+        repair = next(item for item in native["repairClosures"] if item["id"] == "FB001-L002")
+        repair["owner"] = "integration"
+
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = pathlib.Path(directory)
+            native_bytes = (json.dumps(native, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+            (base_dir / "full-bowl-002.json").write_bytes(native_bytes)
+            case = copy.deepcopy(self.case)
+            consumer = full_bowl_consumers()[1]
+            consumer["native_receipt"]["path"] = "full-bowl-002.json"
+            consumer["native_receipt"]["sha256"] = hashlib.sha256(native_bytes).hexdigest()
+            case["consumers"] = [consumer]
+            receipt = crucible.evaluate_case(case, base_dir)
+
+        result = receipt["consumer_results"][0]
+        self.assertEqual("refuses", result["clauses"]["authority"]["status"])
+        self.assertEqual("refuses", result["clauses"]["consequence"]["status"])
+
+    def test_full_bowl_phase_silhouette_cannot_upgrade_consequence(self):
+        crucible = load_crucible()
+        native = json.loads((CASE_PATH.parent / "full-bowl-002.live-witness.json").read_text(encoding="utf-8"))
+        native["residualUnresolved"] = [
+            item for item in native["residualUnresolved"]
+            if item["id"] != "FB001-U001"
+        ]
+
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = pathlib.Path(directory)
+            native_bytes = (json.dumps(native, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+            (base_dir / "full-bowl-002.json").write_bytes(native_bytes)
+            case = copy.deepcopy(self.case)
+            consumer = full_bowl_consumers()[1]
+            consumer["native_receipt"]["path"] = "full-bowl-002.json"
+            consumer["native_receipt"]["sha256"] = hashlib.sha256(native_bytes).hexdigest()
+            case["consumers"] = [consumer]
+            receipt = crucible.evaluate_case(case, base_dir)
+
+        consequence = receipt["consumer_results"][0]["clauses"]["consequence"]
+        self.assertEqual("unresolved", consequence["status"])
+
     def test_clause_verdicts_do_not_average_into_green(self):
         receipt = self.evaluate()
-        expected = self.case["expected"]["clauses"]
         actual = {name: result["verdict"] for name, result in receipt["clauses"].items()}
-        self.assertEqual(expected, actual)
+        self.assertEqual(
+            {
+                "epistemic": "supports",
+                "authority": "supports",
+                "consequence": "only-one-domain",
+                "historical": "only-one-domain",
+                "identity": "supports",
+            },
+            actual,
+        )
         self.assertEqual("split-required", receipt["whole"]["verdict"])
         self.assertIsNone(receipt["aggregate_score"])
         self.assertFalse(has_score_key({key: value for key, value in receipt.items() if key != "aggregate_score"}))
 
-    def test_split_required_returns_productive_missing_discriminators(self):
+    def test_local_clauses_keep_the_whole_split_required(self):
         receipt = self.evaluate()
-        for name in ("authority", "consequence", "historical"):
+        for name in ("consequence", "historical"):
             clause = receipt["clauses"][name]
             self.assertEqual("only-one-domain", clause["verdict"])
             self.assertTrue(clause["semantic_fracture"])
             self.assertTrue(clause["missing_discriminator"])
+        self.assertEqual("split-required", receipt["whole"]["verdict"])
 
     def test_native_receipt_digest_is_enforced(self):
         case = copy.deepcopy(self.case)

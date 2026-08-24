@@ -4,7 +4,7 @@
 
 Accepted on 2026-08-24 for [Free Graph issue #5](https://github.com/the-static-collective/free-graph/issues/5).
 
-The first expected result is deliberately not a certification. The attractive combined slogan fractures under translation: National Treasure can independently test its epistemic part, while Free Graph presently carries the stronger local constitutional claims. A `split-required` whole verdict is a successful discovery.
+The first observed result is deliberately not a certification. The attractive combined slogan fractures under translation: National Treasure independently tests its epistemic part; a later harvest of pre-existing Full Bowl artifacts supports authority but preserves consequence as unresolved; history remains local. A `split-required` whole verdict is a successful discovery.
 
 ## Purpose
 
@@ -113,6 +113,16 @@ The adapter tests only what that domain actually earns:
 
 It does not translate National Treasure's mathematical testimony into Free Graph authority, consequence, or history claims.
 
+### Existing Full Bowl consumers
+
+The harness ingests the original Full Bowl 001 and repaired-world Full Bowl 002 native receipts byte-for-byte from their canonical integration commit. They predate the crucible and retain their own schemas and vocabulary.
+
+Full Bowl 001 is deliberately not rescued by interpretation: its own leaks say that the authority-to-outcome boundary is compressed and that same-specimen causal reconciliation lacks the genuine warrant and terminal receipt. Its authority, consequence, and history readings are `unresolved`.
+
+Full Bowl 002 independently exposes a Corpus OS-owned ordered phase sequence: destination admission, local authority, attempt, and outcome. That native behavior satisfies authority without an adapter-authored declaration. Its own `FB001-U001` still says the genuine warrant and terminal receipt needed for same-specimen causal reconciliation are unavailable, so consequence remains unresolved rather than being inferred from the phase silhouette. It does not exercise decoder succession and remains unresolved for history.
+
+Removing the unresolved label without adding genuine causal evidence must not upgrade the consequence result; the phase silhouette remains insufficient on its own.
+
 ### Mandatory poison consumer
 
 The poison imports none of Free Graph's code but deliberately copies its nouns and receipt silhouette. It declares:
@@ -152,6 +162,8 @@ Adapters expose a small behavior trace to the evaluator. The trace is not a port
 
 Self-described policy fields are retained for the attack receipt but never used to decide compliance.
 
+The case itself must not contain verdict ground truth. Input validation recursively rejects `expected`, `verdict`, and equivalent expected-verdict keys. Tests establish verdict changes by mutating operational behavior, not by reading labels from fixtures.
+
 ## Clause verdicts
 
 Each clause receives exactly one of:
@@ -171,15 +183,15 @@ The whole candidate has no score and no aggregate green. The v0 whole verdict is
 
 This is conjunction, not averaging. Four portable clauses plus one local clause are two laws hiding inside one sentence, not an 80% portable law.
 
-## Expected v0 result
+## Observed v0 result
 
-| Clause | Expected verdict | Reason |
+| Clause | Observed verdict | Reason |
 | --- | --- | --- |
 | epistemic | `supports` | Free Graph and native SSW independently preserve the compatible-world set under re-expression |
 | identity | `supports` | Free Graph preserves object/worldline identity; SSW preserves two graph identities despite equal observations |
-| authority | `only-one-domain` | only Free Graph presently supplies a constitutional warrant control |
-| consequence | `only-one-domain` | only Free Graph presently supplies the separately attributable gate control |
-| historical | `only-one-domain` | only Free Graph presently supplies append-only decoder history |
+| authority | `supports` | Free Graph and the pre-existing Full Bowl 002 native phase sequence independently require attributable local authorization |
+| consequence | `only-one-domain` | Full Bowl 002 shows the ordered native phases but preserves `FB001-U001`; only Free Graph currently supplies the separately reconstructible gate-to-transition evidence |
+| historical | `only-one-domain` | only Free Graph presently supplies a decoder-versioned append with an explicit derivation edge; existing Haunted Toaster behavior is a near match but not sufficient native evidence |
 | whole | `split-required` | the conjunction does not yet survive translation |
 
 ## Productive refusal

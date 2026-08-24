@@ -11,18 +11,18 @@
     },
     "authority": {
       "statement": "Projection alone does not increase warrant, permission, or local authority.",
-      "semantic_fracture": "National Treasure's mathematical receipt contains no native warrant or permission transition to test.",
-      "missing_discriminator": "Add a materially different non-Free-Graph consumer whose native authorization model proves a representation cannot unlock an action without a separately attributable local gate."
+      "semantic_fracture": "No fracture is presently observed between Free Graph's warrant control and Full Bowl 002's native owner-local authority phase. Full Bowl 001 remains unresolved because its original receipt compresses admission, authority, attempt, and outcome.",
+      "missing_discriminator": "A third unrelated native authorization model could test whether representation output remains non-authoritative until its own attributable local gate fires."
     },
     "consequence": {
       "statement": "Projection alone does not constitute a consequential state change; any consequence requires an independently named local gate.",
-      "semantic_fracture": "National Treasure's mathematical receipt is observational and contains no native causal state transition or local decision gate.",
-      "missing_discriminator": "Add a materially different consumer that lets representation output participate in a causal path while requiring a separately attributable local decision gate for state change."
+      "semantic_fracture": "Full Bowl 002 exposes ordered local-authority, attempt, and outcome phases, but FB001-U001 explicitly withholds the genuine warrant and terminal receipt required for same-specimen causal reconciliation. Treating the phase silhouette alone as completed causal proof would silently upgrade its native unresolved state.",
+      "missing_discriminator": "Find an existing unrelated system whose native receipt preserves both sides of the same causal chain: representation may inform the system, while a separately attributable decision or commit event demonstrably owns the actual state transition."
     },
     "historical": {
       "statement": "Decoder or lens changes append attributable projections rather than rewriting prior projections.",
-      "semantic_fracture": "National Treasure's founding receipt has one native evaluation history and does not exercise decoder-version succession.",
-      "missing_discriminator": "Add a materially different append-only consumer that preserves old renderings while a versioned decoder emits a newly attributable rendering."
+      "semantic_fracture": "National Treasure and both Full Bowl receipts lack a native decoder-version succession with an explicit derivation edge. Haunted Toaster separately preserves replayable rasters and immutable receipt bytes, but its existing artifacts do not pair old and new renderings of the same source under two renderer versions.",
+      "missing_discriminator": "Find an existing unrelated system with separately addressable old and new renderings of the same source under two interpreter, renderer, or decoder versions, plus native attribution from the new derivation to its prior rendering."
     },
     "identity": {
       "statement": "Representation or lens change does not silently become object or worldline change.",
@@ -184,6 +184,48 @@
       }
     },
     {
+      "id": "full-bowl-001-original",
+      "role": "embodiment",
+      "source": {
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940",
+        "path": "receipts/full-bowl-001/live-witness.json"
+      },
+      "materiality": {
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "implementation_family": "full-bowl-cross-repository-node-v0",
+        "vocabulary_family": "attributable-becoming-crossings-v0",
+        "receipt_shape": "static-collective/full-bowl-001-live-witness-summary/v0"
+      },
+      "native_receipt": {
+        "path": "full-bowl-001.live-witness.json",
+        "sha256": "55d6431b7e5acd03bb5bf05f17e7dd4e3e5227803fdc5e54a941470b68c17199",
+        "adapter": "full-bowl-001/v0",
+        "clauses": ["authority", "consequence", "historical"]
+      }
+    },
+    {
+      "id": "full-bowl-002-repaired-world",
+      "role": "embodiment",
+      "source": {
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "revision": "5f6e0b9460859a26868bc2f58f6693d6734e1940",
+        "path": "receipts/full-bowl-002/live-witness.json"
+      },
+      "materiality": {
+        "repository": "the-static-collective/What-is-the-static-collective-",
+        "implementation_family": "full-bowl-cross-repository-node-v0",
+        "vocabulary_family": "attributable-becoming-crossings-v0",
+        "receipt_shape": "static-collective/full-bowl-002-repair-rerun/v0"
+      },
+      "native_receipt": {
+        "path": "full-bowl-002.live-witness.json",
+        "sha256": "25f8b0f4f45ffc1be652f56da6d46da450742ab4c23b6ec847548c90a17c50ee",
+        "adapter": "full-bowl-002/v0",
+        "clauses": ["authority", "consequence", "historical"]
+      }
+    },
+    {
       "id": "poison-copied-nouns-reversed-behavior",
       "role": "poison",
       "source": {
@@ -212,16 +254,5 @@
         "clauses": ["authority", "consequence"]
       }
     }
-  ],
-  "expected": {
-    "clauses": {
-      "epistemic": "supports",
-      "authority": "only-one-domain",
-      "consequence": "only-one-domain",
-      "historical": "only-one-domain",
-      "identity": "supports"
-    },
-    "whole": "split-required",
-    "mandatory_attack": "caught"
-  }
+  ]
 }

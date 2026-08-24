@@ -1,8 +1,8 @@
 # Promotion/Invariance Crucible v0 Implementation Plan
 
-> **Execution note:** implement inline with test-driven development under the approved two-repository scope.
+> **Execution note:** implement inline with test-driven development; expand beyond the founding two repositories only by harvesting pre-existing unrelated artifacts, not by constructing clause-specific witnesses.
 
-**Goal:** Build a deterministic clause-level harness that detects vocabulary leakage, consumes the native National Treasure SSW mathematical receipt, and returns the expected `split-required` result without widening Free Graph's substrate contract.
+**Goal:** Build a deterministic clause-level harness that detects vocabulary leakage, consumes native unrelated-system receipts, and derives a `split-required` result without widening Free Graph's substrate contract or accepting verdict ground truth as input.
 
 **Architecture:** A JSON case contains native consumer metadata and normalized operational traces. A dependency-free Python evaluator checks behavior, material difference, mandatory poison attacks, clause-level translation evidence, and missing discriminators. National Treasure remains an independent repository and is pinned by immutable commit and native receipt digest.
 
@@ -20,7 +20,8 @@
 - Count only materially different positive embodiments toward portability.
 - Report poison outcomes separately; they never count as positive embodiments.
 - Emit no average, percentage, or aggregate green.
-- Preserve `split-required` as a successful expected v0 result.
+- Preserve a lawfully derived `split-required` as a successful v0 result.
+- Search pre-existing unrelated systems before constructing clause-specific specimens.
 
 ---
 
@@ -36,7 +37,9 @@
 - [ ] Write decoder-history and lens/object identity negative controls.
 - [ ] Write a fake second wrapper test proving implementation reuse cannot satisfy material difference.
 - [ ] Write the mandatory copied-vocabulary/reversed-behavior poison test.
-- [ ] Write an end-to-end expected-verdict test with no score and whole `split-required`.
+- [x] Write an end-to-end behavior-derived verdict test with no score and whole `split-required`.
+- [x] Reject expected/verdict ground-truth keys anywhere in the case input.
+- [x] Mutate behavior to prove the same clause can derive `supports`, `only-one-domain`, and `refuses`.
 - [ ] Run `python3 -m unittest tests.test_promotion_crucible -v` and verify RED because the evaluator does not exist.
 
 ### Task 2: Implement the smallest behavior-first evaluator
@@ -78,7 +81,19 @@
 - [ ] Generate the receipt twice and confirm byte identity.
 - [ ] Document every clause verdict, poison outcome, semantic fracture, and missing discriminator.
 - [ ] State the consequence clause exactly: no consequence without a separately attributable local gate.
-- [ ] State that `split-required` is the expected successful discovery.
+- [x] State that `split-required` is the observed successful discovery, not fixture ground truth.
+
+### Task 4A: Harvest pre-existing unrelated systems
+
+**Files:**
+
+- Add unedited native Full Bowl receipts under `specimens/promotion-crucible-v0/`.
+- Update the case, evaluator adapters, tests, receipt, and interpretation.
+
+- [x] Evaluate Full Bowl 001 as-is and preserve its unresolved authority/consequence result.
+- [x] Evaluate Full Bowl 002's native ordered owner-local phases as independent authority evidence while preserving `FB001-U001` as an unresolved consequence boundary.
+- [x] Search Haunted Toaster's existing replay/archive behavior for history without inventing a new paired-rendering specimen.
+- [x] Keep consequence and history `only-one-domain` because their required native discriminators were not found.
 
 ### Task 5: Repository verification and draft publication
 

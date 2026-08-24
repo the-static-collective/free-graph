@@ -22,6 +22,15 @@ MATERIALITY_FIELDS = (
     "receipt_shape",
 )
 WARRANT_LEVELS = {"none": 0, "source-local": 1, "owner-local": 2}
+VERDICT_GROUND_TRUTH_KEYS = {
+    "clauseverdicts",
+    "expected",
+    "expectedverdict",
+    "expectedwhole",
+    "groundtruth",
+    "verdict",
+    "wholeverdict",
+}
 
 
 def _canonical_bytes(value: Any) -> bytes:
@@ -39,6 +48,18 @@ def _sha256_bytes(value: bytes) -> str:
 
 def _nonempty_string(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip())
+
+
+def _reject_verdict_ground_truth(value: Any, path: str = "case") -> None:
+    if isinstance(value, dict):
+        for key, item in value.items():
+            normalized = "".join(character for character in str(key).lower() if character.isalnum())
+            if normalized in VERDICT_GROUND_TRUTH_KEYS:
+                raise ValueError(f"case contains verdict ground truth at {path}.{key}")
+            _reject_verdict_ground_truth(item, f"{path}.{key}")
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            _reject_verdict_ground_truth(item, f"{path}[{index}]")
 
 
 def _string_list(value: Any, field: str) -> list[str]:
@@ -332,15 +353,187 @@ def _adapt_copied_projection_poison(
     return adapted
 
 
+def _native_result(result_id: str, status: str, observation: str) -> dict[str, Any]:
+    return {
+        "id": result_id,
+        "status": status,
+        "observations": [observation],
+    }
+
+
+def _adapt_full_bowl_001(
+    receipt: dict[str, Any],
+    clauses: list[str],
+) -> dict[str, list[dict[str, Any]]]:
+    if receipt.get("schema") != "static-collective/full-bowl-001-live-witness-summary/v0":
+        raise ValueError("Full Bowl 001 adapter requires its native live-witness schema")
+    requested = _string_list(clauses, "native_receipt.clauses")
+    if any(clause not in {"authority", "consequence", "historical"} for clause in requested):
+        raise ValueError("Full Bowl 001 adapter only exposes authority, consequence, and historical pressure")
+
+    checks = {
+        item.get("id"): item.get("status")
+        for item in receipt.get("liveChecks", [])
+        if isinstance(item, dict)
+    }
+    receipts = receipt.get("receipts") if isinstance(receipt.get("receipts"), dict) else {}
+    admission = receipts.get("corpusAdmission") if isinstance(receipts.get("corpusAdmission"), dict) else {}
+    transfers = [
+        value.get("authorityTransfer")
+        for value in admission.values()
+        if isinstance(value, dict)
+    ]
+    leaks = {
+        item.get("id")
+        for item in receipt.get("leakLedger", {}).get("entries", [])
+        if isinstance(item, dict) and item.get("classification") == "exposed"
+    }
+    unresolved = {
+        item.get("id")
+        for item in receipt.get("residualUnresolved", [])
+        if isinstance(item, dict)
+    }
+
+    adapted: dict[str, list[dict[str, Any]]] = {}
+    if "authority" in requested:
+        authority_refused = (
+            receipt.get("authority") != "none"
+            or any(value != "none" for value in transfers)
+            or checks.get("corpus-invented-authority-refused") != "pass"
+            or checks.get("reachability-does-not-become-permission") != "pass"
+        )
+        status = "refuses" if authority_refused else "unresolved"
+        observation = (
+            "native authority behavior widened or failed its caller-authority and reachability controls"
+            if authority_refused else
+            "native caller-authority and reachability attacks are refused, but FB001-L002 leaves the local-authority phase externally compressed"
+        )
+        adapted["authority"] = [_native_result("native:full-bowl-001:authority", status, observation)]
+    if "consequence" in requested:
+        world_cut = receipts.get("worldCut") if isinstance(receipts.get("worldCut"), dict) else {}
+        completed = (
+            checks.get("worldcut-keeps-visible-return-and-terminal-history") == "pass"
+            and world_cut.get("terminalDisposition") == "completed"
+            and bool(world_cut.get("constitutedOutputRefs"))
+        )
+        if not completed:
+            status = "refuses"
+            observation = "native receipt does not expose the claimed completed consequential output"
+        else:
+            status = "unresolved"
+            observation = (
+                "native completed output is visible, but FB001-L002 and FB001-U001 withhold the separately reconstructible "
+                "local-authority, attempt, and terminal lineage needed to attribute the consequence gate"
+            )
+            if "FB001-L002" not in leaks or "FB001-U001" not in unresolved:
+                observation = "native completed output lacks a separately reconstructible local gate and terminal lineage"
+        adapted["consequence"] = [_native_result("native:full-bowl-001:consequence", status, observation)]
+    if "historical" in requested:
+        adapted["historical"] = [_native_result(
+            "native:full-bowl-001:historical",
+            "unresolved",
+            "native receipt distinguishes visible return from changed history but contains no decoder-version succession or derived rendering append",
+        )]
+    return adapted
+
+
+def _adapt_full_bowl_002(
+    receipt: dict[str, Any],
+    clauses: list[str],
+) -> dict[str, list[dict[str, Any]]]:
+    if receipt.get("schema") != "static-collective/full-bowl-002-repair-rerun/v0":
+        raise ValueError("Full Bowl 002 adapter requires its native repaired-world schema")
+    requested = _string_list(clauses, "native_receipt.clauses")
+    if any(clause not in {"authority", "consequence", "historical"} for clause in requested):
+        raise ValueError("Full Bowl 002 adapter only exposes authority, consequence, and historical pressure")
+
+    closures = {
+        item.get("id"): item
+        for item in receipt.get("repairClosures", [])
+        if isinstance(item, dict)
+    }
+    phase_closure = closures.get("FB001-L002", {})
+    phase_evidence = phase_closure.get("evidence", {})
+    phases = phase_evidence.get("phases") if isinstance(phase_evidence, dict) else None
+    required = [
+        ("destination-admission", "admitted", "CORPUS_DESTINATION_ADMITTED"),
+        ("local-authority", "admitted", "ACTION_WARRANT_ADMITTED"),
+        ("attempt", "admitted", "ACTION_WARRANT_EXECUTED"),
+        ("outcome", "completed", "CORPUS_ENCOUNTER_COMPLETED"),
+    ]
+    phase_shape_present = isinstance(phases, list) and len(phases) == len(required)
+    phase_shape_matches = phase_shape_present and all(
+        isinstance(phase, dict)
+        and (phase.get("phase"), phase.get("disposition"), phase.get("reasonCode")) == expectation
+        and phase.get("authorityTransfer") == "none"
+        and isinstance(phase.get("evidenceRefs"), list)
+        and bool(phase["evidenceRefs"])
+        for phase, expectation in zip(phases, required)
+    )
+    top_level_transfer_is_none = phase_evidence.get("authorityTransfer") == "none"
+    phase_owner_is_attributable = (
+        phase_closure.get("status") == "closed"
+        and phase_closure.get("owner") == "Corpus OS"
+    )
+    unresolved_ids = {
+        item.get("id")
+        for item in receipt.get("residualUnresolved", [])
+        if isinstance(item, dict)
+    }
+
+    adapted: dict[str, list[dict[str, Any]]] = {}
+    if "authority" in requested:
+        if not phase_shape_present:
+            status = "unresolved"
+            observation = "native repaired-world receipt does not expose a complete ordered phase surface"
+        elif not phase_shape_matches or not top_level_transfer_is_none or not phase_owner_is_attributable:
+            status = "refuses"
+            observation = "native attempt is not preceded by an attributable admitted local-authority phase with no authority transfer"
+        else:
+            status = "satisfies"
+            observation = "native encounter admission is followed by a distinct local ACTION_WARRANT_ADMITTED phase before the attempt becomes admitted"
+        adapted["authority"] = [_native_result("native:full-bowl-002:authority", status, observation)]
+    if "consequence" in requested:
+        if not phase_shape_present:
+            status = "unresolved"
+            observation = "native repaired-world receipt does not expose enough ordered phases to attribute the completed outcome"
+        elif not phase_shape_matches or not top_level_transfer_is_none or not phase_owner_is_attributable:
+            status = "refuses"
+            observation = "native completed outcome is not attributable through the required local-authority and attempt phases"
+        else:
+            status = "unresolved"
+            if "FB001-U001" in unresolved_ids:
+                observation = (
+                    "native ordered phases show local authorization before the completed outcome, but FB001-U001 explicitly withholds "
+                    "the genuine warrant and terminal receipt needed for same-specimen causal reconciliation"
+                )
+            else:
+                observation = (
+                    "native ordered inert phases do not themselves expose the genuine warrant and terminal receipt needed to "
+                    "attribute the same-specimen consequence; removing an unresolved label is not positive causal evidence"
+                )
+        adapted["consequence"] = [_native_result("native:full-bowl-002:consequence", status, observation)]
+    if "historical" in requested:
+        adapted["historical"] = [_native_result(
+            "native:full-bowl-002:historical",
+            "unresolved",
+            "native rerun preserves the earlier witness as history but does not identify a decoder version or an attributable derived rendering edge",
+        )]
+    return adapted
+
+
 NATIVE_ADAPTERS = {
     "ssw-math-001/v0": _adapt_ssw_math_001,
     "copied-projection-poison/v0": _adapt_copied_projection_poison,
+    "full-bowl-001/v0": _adapt_full_bowl_001,
+    "full-bowl-002/v0": _adapt_full_bowl_002,
 }
 
 
 def _validate_case(case: dict[str, Any]) -> None:
     if not isinstance(case, dict) or case.get("case_schema") != CASE_SCHEMA:
         raise ValueError(f"case_schema must equal {CASE_SCHEMA!r}")
+    _reject_verdict_ground_truth(case)
     if not _nonempty_string(case.get("candidate_id")):
         raise ValueError("candidate_id must be non-empty")
     clauses = case.get("clauses")
@@ -425,10 +618,15 @@ def _evaluate_consumer(consumer: dict[str, Any], base_dir: pathlib.Path) -> dict
     clause_results: dict[str, dict[str, Any]] = {}
     for clause in CLAUSES:
         results = details[clause]
+        invalid = [result.get("status") for result in results if result.get("status") not in {"satisfies", "refuses", "unresolved"}]
+        if invalid:
+            raise ValueError(f"consumer {consumer['id']} emitted invalid {clause} result status")
         if not results:
             status = "not-tested"
         elif any(result["status"] == "refuses" for result in results):
             status = "refuses"
+        elif any(result["status"] == "unresolved" for result in results):
+            status = "unresolved"
         else:
             status = "satisfies"
         clause_results[clause] = {

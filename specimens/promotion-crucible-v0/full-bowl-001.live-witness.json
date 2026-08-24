@@ -1,0 +1,279 @@
+{
+  "schema": "static-collective/full-bowl-001-live-witness-summary/v0",
+  "fixtureId": "full-bowl-001-maddclown",
+  "capturedAt": "2026-08-24T03:11:18-05:00",
+  "fixtureDigest": "sha256:710e94849326dcf19b2539c7832b1a8b29d7a26b91461de47d76022fa1abc488",
+  "liveClaimDigest": "sha256:5ff4cc12cc99ddc74163356230fb5e15f37f69b0283b47aa94c96c18327eff9a",
+  "status": "survives-with-exposed-leaks",
+  "taskWorldCutOwnerHeads": {
+    "the-static-collective/What-is-the-static-collective-": "3d35990f2c084ae5b402e3e348d2da7ee33b4a3c",
+    "the-static-collective/project0": "061b9a6e1c9314f7fb43dbb0026059211ed19f0d",
+    "the-static-collective/corpus-os": "1f3344b5f3f46d28ff6dda901d9c14620641b6ca",
+    "the-static-collective/tranchnode": "91f7f96805d4e868e35b8d0c75dc5f0671cb494a"
+  },
+  "integrationRunner": {
+    "baseHead": "3d35990f2c084ae5b402e3e348d2da7ee33b4a3c",
+    "headRelation": "descendant-of-pinned-base",
+    "runnerDigest": "sha256:88f2b63db2ca9f7a76007a0879498d7d162431930c1681d5f1d813ae5e0051a7"
+  },
+  "ownerValidation": [
+    {
+      "owner": "Project0",
+      "command": "./node_modules/.bin/tsc --outDir .build && node --test .build/tests/*.test.js",
+      "tests": 260,
+      "passed": 260,
+      "failed": 0
+    },
+    {
+      "owner": "Corpus OS",
+      "command": "./node_modules/.bin/tsc -p tsconfig.kernel.json && node --test tests/causal-accounting.test.mjs tests/continuity-attestation.test.mjs tests/latent-reachability.test.mjs tests/world-encounter-admission.test.mjs",
+      "tests": 41,
+      "passed": 41,
+      "failed": 0
+    },
+    {
+      "owner": "TranchNode",
+      "command": "./node_modules/.bin/tsc -p tsconfig.json --noEmit && node --test --import tsx 'test/**/*.test.ts'",
+      "tests": 120,
+      "passed": 120,
+      "failed": 0
+    }
+  ],
+  "liveChecks": [
+    {
+      "id": "project0-addressed",
+      "status": "pass"
+    },
+    {
+      "id": "project0-exact-verify",
+      "status": "pass"
+    },
+    {
+      "id": "corpus-clean-admitted",
+      "status": "pass"
+    },
+    {
+      "id": "corpus-invented-authority-refused",
+      "status": "pass"
+    },
+    {
+      "id": "corpus-missing-subject-unresolved",
+      "status": "pass"
+    },
+    {
+      "id": "worldcut-keeps-visible-return-and-terminal-history",
+      "status": "pass"
+    },
+    {
+      "id": "corpus-continuity-keeps-classes-distinct",
+      "status": "pass"
+    },
+    {
+      "id": "tranchnode-boundary-keeps-four-classes",
+      "status": "pass"
+    },
+    {
+      "id": "project0-purpose-relative-recognition",
+      "status": "pass"
+    },
+    {
+      "id": "reachability-does-not-become-permission",
+      "status": "pass"
+    }
+  ],
+  "receipts": {
+    "project0Encounter": {
+      "ref": "enc-aaa7b44323865f6b95ecaa774c48ab8e40b1b41fc851b0ebce2824f16d74088a",
+      "addressed": true,
+      "exactBodyVerified": true,
+      "sourceAuthorityRefs": []
+    },
+    "corpusAdmission": {
+      "lawful": {
+        "status": "admitted",
+        "reasonCode": "CORPUS_ENCOUNTER_ADMITTED",
+        "authorityTransfer": "none",
+        "callerAuthenticated": false,
+        "receiptRequestId": "session-request-0001",
+        "outputRefs": [
+          "session-output:session-request-0001"
+        ]
+      },
+      "refused": {
+        "status": "refused",
+        "reasonCode": "CALLER_AUTHORITY_NOT_ACCEPTED",
+        "authorityTransfer": "none"
+      },
+      "unresolved": {
+        "status": "indeterminate",
+        "reasonCode": "DESTINATION_SUBJECT_UNRESOLVED",
+        "authorityTransfer": "none"
+      }
+    },
+    "worldCut": {
+      "visibleStateRef": "visible:full-bowl-001:sealed",
+      "terminalDisposition": "completed",
+      "constitutedOutputRefs": [
+        "custody:corpus-os",
+        "history:full-bowl-001:after",
+        "session-output:session-request-0001"
+      ],
+      "orphanObservations": [
+        {
+          "ref": "maddcl0wn:uncategorized-object",
+          "classification": "ORPHAN_OBSERVATION"
+        }
+      ]
+    },
+    "corpusContinuity": {
+      "preservedRefs": [
+        "artifact:agreement-a",
+        "responsibility:preserve-attribution",
+        "visible:full-bowl-001:sealed"
+      ],
+      "transformed": [
+        {
+          "priorRef": "custody:project0",
+          "currentRef": "custody:corpus-os"
+        },
+        {
+          "priorRef": "history:full-bowl-001:before",
+          "currentRef": "history:full-bowl-001:after"
+        }
+      ],
+      "unresolvedRefs": [
+        "session-output:session-request-0001"
+      ],
+      "authorityContinuity": "none"
+    },
+    "tranchNodeContinuity": {
+      "hash": "sha256:1732da887f26f9e59905efd47980837c0ed57528cb35248b3173572fc5ce20e3",
+      "preserved": [
+        "artifact:agreement-a",
+        "authority:portable:none",
+        "responsibility:preserve-attribution",
+        "visible:full-bowl-001:sealed"
+      ],
+      "differentiated": [
+        "custody:corpus-os",
+        "history:full-bowl-001:after"
+      ],
+      "lost": [
+        "custody:project0",
+        "history:full-bowl-001:before"
+      ],
+      "unresolved": [
+        "maddcl0wn:uncategorized-object"
+      ],
+      "authority": "none"
+    },
+    "purposeRelativeRecognition": {
+      "original": {
+        "status": "conforming",
+        "reasonCodes": []
+      },
+      "lookalike": {
+        "status": "refused",
+        "reasonCodes": [
+          "MISSING_MATERIAL_ROOT",
+          "UNDECLARED_ROOT"
+        ]
+      }
+    },
+    "reachabilityAttack": {
+      "reachable": false,
+      "code": "LATENT_WARRANT_INVALID",
+      "legalValidity": "unclaimed"
+    }
+  },
+  "evidenceModes": [
+    {
+      "crossings": [
+        "FB001-X01",
+        "FB001-X02"
+      ],
+      "mode": "live-owner-process-adapter"
+    },
+    {
+      "crossings": [
+        "FB001-X03",
+        "FB001-X04",
+        "FB001-X05"
+      ],
+      "mode": "live-owner-process-result-with-compressed-internal-phases"
+    },
+    {
+      "crossings": [
+        "FB001-X06"
+      ],
+      "mode": "owner-tests-green; same-run causal reconciliation not exposed by stdio"
+    },
+    {
+      "crossings": [
+        "FB001-X07",
+        "FB001-X08"
+      ],
+      "mode": "live-owner-module-with-explicit-synthetic-projection"
+    },
+    {
+      "crossings": [
+        "FB001-X09",
+        "FB001-X10"
+      ],
+      "mode": "live-owner-module; positive current-warrant reachability remains unresolved"
+    }
+  ],
+  "leakLedger": {
+    "automaticRepair": false,
+    "entries": [
+      {
+        "id": "FB001-L001",
+        "classification": "exposed",
+        "crossingId": "FB001-X02",
+        "title": "Detached encounter reference is admitted as evidence",
+        "observation": "Corpus OS admitted enc-ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff even though it was never addressed or verified by the pinned Project0 surface, then copied it into evidenceRefs.",
+        "authorityExpanded": false,
+        "repairIssueState": "opened",
+        "repairIssueRef": "github:the-static-collective/What-is-the-static-collective-#54"
+      },
+      {
+        "id": "FB001-L002",
+        "classification": "exposed",
+        "crossingId": "FB001-X03",
+        "title": "Boundary result compresses admission, authority, attempt, and outcome",
+        "observation": "The admitted stdio result exposes one aggregate status and one Session request id, but no separately reconstructible phase dispositions.",
+        "authorityExpanded": false,
+        "repairIssueState": "opened",
+        "repairIssueRef": "github:the-static-collective/corpus-os#32"
+      }
+    ]
+  },
+  "residualUnresolved": [
+    {
+      "id": "FB001-U001",
+      "crossingId": "FB001-X06",
+      "statement": "The stdio boundary does not expose the genuine warrant and terminal receipt needed for same-specimen causal reconciliation."
+    },
+    {
+      "id": "FB001-U002",
+      "crossingId": "FB001-X10",
+      "statement": "No genuine new unspent local warrant is exported, so positive post-return reachability is deliberately unclaimed."
+    }
+  ],
+  "repairIssueCandidates": [
+    {
+      "repository": "the-static-collective/What-is-the-static-collective-",
+      "issueRef": "github:the-static-collective/What-is-the-static-collective-#54",
+      "title": "Full Bowl: bind Corpus admission to the observed Project0 encounter receipt",
+      "smallestRepair": "Add an integration-owned Project0 exact-body/ref verification guard before Corpus invocation; do not add Project0 as a Corpus authority dependency."
+    },
+    {
+      "repository": "the-static-collective/corpus-os",
+      "issueRef": "github:the-static-collective/corpus-os#32",
+      "title": "World encounter result: expose non-authoritative phase dispositions",
+      "smallestRepair": "Add inert phase disposition/evidence fields without exporting the warrant, actor capacity, or authority object."
+    }
+  ],
+  "authority": "none",
+  "legalValidity": "unclaimed"
+}

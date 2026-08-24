@@ -67,7 +67,7 @@ python3 scripts/promotion_crucible.py \
   specimens/promotion-crucible-v0/case.json
 ```
 
-The founding two-repository result is intentionally `split-required`; see [`docs/promotion-crucible-v0.md`](docs/promotion-crucible-v0.md).
+The current behavior-derived result remains `split-required` after harvesting pre-existing Full Bowl artifacts: authority gained a second embodiment, while consequence and history still refuse promotion. See [`docs/promotion-crucible-v0.md`](docs/promotion-crucible-v0.md).
 
 ## Public/private source boundary
 

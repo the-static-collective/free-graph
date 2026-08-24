@@ -96,7 +96,7 @@ This is one embodiment, not enough for portability by itself.
 The second repository remains implementation-independent and vocabulary-independent. The crucible pins National Treasure commit:
 
 ```text
-26a6cab21dfeb203350c51e46d18574a9eb68c5f
+65e67062a3be933332db36af8bc095fc9b2660b4
 ```
 
 and adapts the native `ssw-math.receipt/v0` testimony from:

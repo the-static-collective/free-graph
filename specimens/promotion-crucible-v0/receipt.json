@@ -21,7 +21,7 @@
   ],
   "candidate_id": "no-silent-promotion-five-clause-candidate",
   "candidate_law_is_conjunction": true,
-  "case_digest": "sha256:92c26983c8435ace414fcbcafd856c74a7ea8b84864caa9aa58bc6fc153166a0",
+  "case_digest": "sha256:27cbabcb48da2891b593729abfe4ba434efe40299cabf3f0c07ed6dd91c9250d",
   "clauses": {
     "authority": {
       "independent_supports": [
@@ -248,7 +248,7 @@
       "source": {
         "path": "cases/same-state-different-world/specimens/ssw-math-001/receipt.json",
         "repository": "the-static-collective/national-treasure",
-        "revision": "26a6cab21dfeb203350c51e46d18574a9eb68c5f"
+        "revision": "65e67062a3be933332db36af8bc095fc9b2660b4"
       }
     },
     {
@@ -329,7 +329,7 @@
       "native_receipt_sha256": "45ae6d1ff7fb29358320ff637d53a3594422d60d68ace7aa4546fc25ecbfb447",
       "path": "cases/same-state-different-world/specimens/ssw-math-001/receipt.json",
       "repository": "the-static-collective/national-treasure",
-      "revision": "26a6cab21dfeb203350c51e46d18574a9eb68c5f"
+      "revision": "65e67062a3be933332db36af8bc095fc9b2660b4"
     },
     {
       "consumer_id": "poison-copied-nouns-reversed-behavior",

@@ -18,7 +18,7 @@ This is the intended successful result. There is no average, percentage, or aggr
 The executable receipt is [`specimens/promotion-crucible-v0/receipt.json`](../specimens/promotion-crucible-v0/receipt.json). Its case digest is:
 
 ```text
-sha256:92c26983c8435ace414fcbcafd856c74a7ea8b84864caa9aa58bc6fc153166a0
+sha256:27cbabcb48da2891b593729abfe4ba434efe40299cabf3f0c07ed6dd91c9250d
 ```
 
 ## What survived translation
@@ -100,7 +100,7 @@ The poison is an integrity attack, never a positive portability embodiment.
 | Source | Immutable pin | Role |
 | --- | --- | --- |
 | Free Graph relational-coordinate pressure | `50f8c5298150f04e7bf08dc29b70e500ccb36880` | local five-clause embodiment |
-| National Treasure SSW-MATH-001 | `26a6cab21dfeb203350c51e46d18574a9eb68c5f` | independent epistemic and identity embodiment |
+| National Treasure SSW-MATH-001 | `65e67062a3be933332db36af8bc095fc9b2660b4` | independent epistemic and identity embodiment |
 | Native SSW receipt | `sha256:45ae6d1ff7fb29358320ff637d53a3594422d60d68ace7aa4546fc25ecbfb447` | unedited native testimony |
 | Blackwell (1953) | [`10.1214/aoms/1177729032`](https://doi.org/10.1214/aoms/1177729032) | research lineage for experiment comparison and stochastic transformation |
 

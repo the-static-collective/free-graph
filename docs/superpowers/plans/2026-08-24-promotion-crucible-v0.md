@@ -63,7 +63,7 @@
 - Update: `specimens/promotion-crucible-v0/case.json`
 - Update: `tests/test_promotion_crucible.py`
 
-- [ ] Copy the native receipt bytes from National Treasure commit `26a6cab21dfeb203350c51e46d18574a9eb68c5f` without editing its schema or vocabulary.
+- [ ] Copy the native receipt bytes from National Treasure remote commit `65e67062a3be933332db36af8bc095fc9b2660b4` without editing its schema or vocabulary.
 - [ ] Record its SHA-256 and immutable source path in the crucible case.
 - [ ] Test the adapter's epistemic and identity readings against native fields.
 - [ ] Prove the native receipt contains none of the Free Graph constitutional vocabulary used by the local fixture.
@@ -90,4 +90,3 @@
 - [ ] Run `git diff --check` and inspect the complete diff.
 - [ ] Commit by intent, push the feature branch, and open a draft PR closing issue #5 while referencing Free Graph #2 and National Treasure #36.
 - [ ] Do not merge without explicit per-PR landing approval.
-

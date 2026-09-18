@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-static-collective.github.io/free-graph/schema/body-surface-v0.schema.json",
+  "title": "Static Collective Body Surface v0",
+  "type": "object",
+  "required": [
+    "schema",
+    "organ",
+    "owner",
+    "publication",
+    "provides",
+    "needs",
+    "interfaces",
+    "measure",
+    "receipts",
+    "residual_fog",
+    "non_authorities",
+    "evidence",
+    "authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "body.surface/v0"
+    },
+    "organ": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publication": {
+      "type": "object",
+      "required": [
+        "status",
+        "standard",
+        "scope"
+      ],
+      "properties": {
+        "status": {
+          "const": "owner-published"
+        },
+        "standard": {
+          "const": "static-collective/body-surface/v0"
+        },
+        "scope": {
+          "const": "interface-declaration"
+        }
+      },
+      "additionalProperties": true
+    },
+    "provides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/declaration"
+      }
+    },
+    "needs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/declaration"
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/interface"
+      }
+    },
+    "measure": {
+      "type": "object",
+      "required": [
+        "declared",
+        "observed"
+      ],
+      "properties": {
+        "declared": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "observed": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "receipts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "residual_fog": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "non_authorities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "authority": {
+      "const": "none"
+    }
+  },
+  "$defs": {
+    "declaration": {
+      "type": "object",
+      "required": [
+        "kind",
+        "protocol",
+        "version"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protocol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "interface": {
+      "type": "object",
+      "required": [
+        "name",
+        "direction",
+        "kind",
+        "protocol",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "direction": {
+          "enum": [
+            "emit",
+            "accept"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protocol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

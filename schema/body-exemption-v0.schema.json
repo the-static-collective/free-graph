@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-static-collective.github.io/free-graph/schema/body-exemption-v0.schema.json",
+  "title": "Static Collective Body Surface Exemption v0",
+  "type": "object",
+  "required": [
+    "schema",
+    "organ",
+    "owner",
+    "reason_code",
+    "reason",
+    "review_trigger",
+    "authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "body.exemption/v0"
+    },
+    "organ": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason_code": {
+      "enum": [
+        "archive-static",
+        "privacy-sensitive",
+        "intentionally-standalone",
+        "non-project-artifact",
+        "authority-boundary",
+        "other"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_trigger": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority": {
+      "const": "none"
+    }
+  },
+  "additionalProperties": true
+}

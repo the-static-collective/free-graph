@@ -181,6 +181,40 @@ The initial surface may be minimal:
 
 Empty declarations are preferable to invented connectivity.
 
+
+## Surface drift witness
+
+A body surface is an owner-published declaration, but executable owner reality may move before the declaration does. BODY-PULSE may therefore consume an optional occurrence-bound `body.owner-interface-witness/v0` alongside a surface.
+
+The witness can name owner-evidenced provided protocols and emitted/accepted interfaces for one exact occurrence. BODY-PULSE compares that witness to the published surface and emits a `body.surface-drift-receipt/v0` when owner-evidenced interfaces are missing from the surface.
+
+This mechanism is deliberately one-way:
+
+```text
+owner witness -> detect missing declaration -> receipt drift
+```
+
+It does not perform:
+
+```text
+drift -> mutate surface
+drift -> infer owner intent
+drift -> authority transfer
+drift -> retroactive body history
+```
+
+The occurrence MUST match. Later owner evidence cannot be projected backward onto an earlier body cut merely because the protocol names look compatible.
+
+Core law:
+
+> **OWNER EXECUTABLE REALITY != BODY DECLARATION -> SURFACE DRIFT, NOT SILENT COMPLETION.**
+
+The witness schema lives at:
+
+```text
+schema/body-owner-interface-witness-v0.schema.json
+```
+
 ## Change discipline
 
 A body surface is an owner interface declaration.

@@ -1,0 +1,82 @@
+{
+  "schema": "body.surface/v0",
+  "organ": "alex",
+  "owner": "the-static-collective/ALEX.2",
+  "authority": "none",
+  "provides": [
+    {
+      "kind": "current-organ-manifest",
+      "protocol": "static-collective/current-organ",
+      "version": "v0"
+    }
+  ],
+  "needs": [
+    {
+      "kind": "calculation-receipt",
+      "protocol": "dogram.receipt",
+      "version": "v0"
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "current-organ",
+      "direction": "emit",
+      "kind": "current-organ-manifest",
+      "protocol": "static-collective/current-organ",
+      "version": "v0"
+    },
+    {
+      "name": "calculation-receipt-input",
+      "direction": "accept",
+      "kind": "calculation-receipt",
+      "protocol": "dogram.receipt",
+      "version": "v0"
+    }
+  ],
+  "measure": {
+    "declared": [
+      {
+        "dimension": "entrypoint",
+        "value": "skills/alex/SKILL.md",
+        "unit": "path"
+      },
+      {
+        "dimension": "runtime-claim",
+        "value": "no-production-runtime-claimed",
+        "unit": "state"
+      }
+    ],
+    "observed": []
+  },
+  "receipts": [
+    {
+      "kind": "github-current-organ",
+      "coordinate": ".live/current-organ.json",
+      "revision": "cad25cdf11f3c617b7120c1b0599589609abbf79"
+    }
+  ],
+  "residual_fog": [
+    "Owner repo has not yet published body.surface/v0; this is a provisional external projection."
+  ],
+  "non_authorities": [
+    "surface != owner adoption",
+    "receipt input != evidence promotion"
+  ],
+  "evidence": [
+    {
+      "kind": "owner-readme",
+      "coordinate": "README.md",
+      "revision": "cad25cdf11f3c617b7120c1b0599589609abbf79"
+    },
+    {
+      "kind": "current-organ",
+      "coordinate": ".live/current-organ.json",
+      "revision": "cad25cdf11f3c617b7120c1b0599589609abbf79"
+    },
+    {
+      "kind": "neighbor-contract",
+      "coordinate": "Dogram README MutatedMathal lowering",
+      "revision": "2869a380efe0b00572a3a2d410289922066d4ef1"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "body.surface/v0",
+  "organ": "free-graph",
+  "owner": "the-static-collective/free-graph",
+  "authority": "none",
+  "provides": [
+    {
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    }
+  ],
+  "needs": [
+    {
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "packet-in",
+      "direction": "accept",
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    },
+    {
+      "name": "packet-out",
+      "direction": "emit",
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    }
+  ],
+  "measure": {
+    "declared": [
+      {
+        "dimension": "portable-verb-count",
+        "value": 5,
+        "unit": "verbs"
+      },
+      {
+        "dimension": "authority-mode",
+        "value": "no-promotion",
+        "unit": "state"
+      }
+    ],
+    "observed": []
+  },
+  "receipts": [
+    {
+      "kind": "github-owner-head",
+      "coordinate": "main",
+      "revision": "105ee68e7acefebd5acf03015389606c96bc5c20"
+    }
+  ],
+  "residual_fog": [
+    "BODY-EMERGENCE code exists only on an unmerged branch at this pulse occurrence."
+  ],
+  "non_authorities": [
+    "graph reachability != truth",
+    "merge != promotion"
+  ],
+  "evidence": [
+    {
+      "kind": "owner-readme",
+      "coordinate": "README.md",
+      "revision": "105ee68e7acefebd5acf03015389606c96bc5c20"
+    }
+  ]
+}

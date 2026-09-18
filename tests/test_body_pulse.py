@@ -35,6 +35,14 @@ class BodyPulseTests(unittest.TestCase):
         self.assertEqual("none", first["authority"])
         self.assertIn("centrality != canon", first["non_promotions"])
 
+    def test_frozen_pulse_matches_receipted_projection(self):
+        generated = body_pulse.run_snapshot(SNAPSHOT)
+        expected = json.loads(
+            (SNAPSHOT.parent / "pulse.receipt.json").read_text(encoding="utf-8")
+        )
+
+        self.assertEqual(expected, generated)
+
     def test_frozen_pulse_exposes_expected_exact_seams(self):
         pulse = body_pulse.run_snapshot(SNAPSHOT)
         seams = {

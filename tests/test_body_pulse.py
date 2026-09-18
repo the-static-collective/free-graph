@@ -12,6 +12,7 @@ assert SPEC.loader is not None
 SPEC.loader.exec_module(body_pulse)
 
 SNAPSHOT = ROOT / "specimens" / "body-pulse-001" / "snapshot.json"
+PHONO_LIVE_SNAPSHOT = ROOT / "specimens" / "phono-live-body-truth-001" / "snapshot.json"
 
 
 class BodyPulseTests(unittest.TestCase):
@@ -78,6 +79,33 @@ class BodyPulseTests(unittest.TestCase):
             ("the-static-collective/Dogram", "calculation-specimen", "dogram.specimen", "v0"),
             unmet,
         )
+
+    def test_phono_live_body_truth_rediscovers_existing_crossing(self):
+        pulse = body_pulse.run_snapshot(PHONO_LIVE_SNAPSHOT)
+
+        self.assertEqual(
+            {
+                "charts": 2,
+                "pairwise_comparisons": 1,
+                "exact_edges": 2,
+                "adapter_edges": 0,
+                "unmet_needs": 0,
+                "isolated_charts": 0,
+            },
+            pulse["counts"],
+        )
+        seams = {
+            (edge["kind"], edge["protocol"], edge["version"])
+            for edge in pulse["exact_edges"]
+        }
+        self.assertEqual(
+            {
+                ("resolved-performance", "haunted-phonograph/resolved-performance", "v1"),
+                ("mutation-receipt", "haunted-phonograph/receipt", "v1"),
+            },
+            seams,
+        )
+        self.assertEqual("none", pulse["authority"])
 
     def test_surface_digest_mismatch_refuses_snapshot(self):
         snapshot = json.loads(SNAPSHOT.read_text(encoding="utf-8"))

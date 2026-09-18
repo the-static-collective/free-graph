@@ -20,6 +20,8 @@ SPEC.loader.exec_module(body_overlap)
 SURFACE_SCHEMA = "body.surface/v0"
 SNAPSHOT_SCHEMA = "body.snapshot/v0"
 PULSE_SCHEMA = "body.pulse-receipt/v0"
+OWNER_INTERFACE_WITNESS_SCHEMA = "body.owner-interface-witness/v0"
+SURFACE_DRIFT_SCHEMA = "body.surface-drift-receipt/v0"
 
 
 class BodyPulseError(ValueError):
@@ -130,7 +132,12 @@ def load_snapshot(path: str | Path) -> tuple[dict[str, Any], Path]:
     return snapshot, snapshot_path.parent
 
 
-def derive_snapshot_charts(snapshot: dict[str, Any], base_dir: Path) -> list[dict[str, Any]]:
+def derive_snapshot_charts(
+    snapshot: dict[str, Any],
+    base_dir: Path,
+    *,
+    surface_drift_receipts: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     charts: list[dict[str, Any]] = []
     seen_owners: set[str] = set()
 
@@ -157,6 +164,25 @@ def derive_snapshot_charts(snapshot: dict[str, Any], base_dir: Path) -> list[dic
         seen_owners.add(owner)
         charts.append(chart)
 
+        witness_path_value = entry.get("owner_witness_path")
+        witness_digest_value = entry.get("owner_witness_digest")
+        if bool(witness_path_value) != bool(witness_digest_value):
+            raise BodyPulseError(
+                f"$.organs[{index}] owner_witness_path and owner_witness_digest must appear together"
+            )
+        if witness_path_value:
+            witness_path = (base_dir / str(witness_path_value)).resolve()
+            witness = _load_json(witness_path)
+            actual_witness_digest = _sha256(witness)
+            if actual_witness_digest != witness_digest_value:
+                raise BodyPulseError(
+                    f"$.organs[{index}] owner witness digest mismatch: "
+                    f"expected {witness_digest_value}, got {actual_witness_digest}"
+                )
+            drift = detect_surface_drift(surface, witness, entry["occurrence"])
+            if surface_drift_receipts is not None:
+                surface_drift_receipts.append(drift)
+
     return sorted(charts, key=lambda c: (c["owner"]["world"], c["owner"]["occurrence"]))
 
 
@@ -166,6 +192,100 @@ def _declaration_key(value: dict[str, Any]) -> tuple[str, str, str]:
         str(value.get("protocol", "")),
         str(value.get("version", "")),
     )
+
+
+def _interface_key(value: dict[str, Any]) -> tuple[str, str, str, str]:
+    return (
+        str(value.get("direction", "")),
+        str(value.get("kind", "")),
+        str(value.get("protocol", "")),
+        str(value.get("version", "")),
+    )
+
+
+def validate_owner_interface_witness(witness: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    if witness.get("schema") != OWNER_INTERFACE_WITNESS_SCHEMA:
+        errors.append(f"$.schema must equal {OWNER_INTERFACE_WITNESS_SCHEMA!r}")
+    if not _nonempty(witness.get("owner")):
+        errors.append("$.owner must be non-empty")
+    if not _nonempty(witness.get("occurrence")):
+        errors.append("$.occurrence must be non-empty")
+    for field in ("provides", "interfaces", "evidence"):
+        if not isinstance(witness.get(field), list):
+            errors.append(f"$.{field} must be an array")
+
+    for index, record in enumerate(witness.get("provides", [])):
+        if not isinstance(record, dict):
+            errors.append(f"$.provides[{index}] must be an object")
+            continue
+        for field in ("kind", "protocol", "version"):
+            if not _nonempty(record.get(field)):
+                errors.append(f"$.provides[{index}].{field} must be non-empty")
+
+    for index, record in enumerate(witness.get("interfaces", [])):
+        if not isinstance(record, dict):
+            errors.append(f"$.interfaces[{index}] must be an object")
+            continue
+        if not _nonempty(record.get("name")):
+            errors.append(f"$.interfaces[{index}].name must be non-empty")
+        if record.get("direction") not in body_overlap.DIRECTIONS:
+            errors.append(f"$.interfaces[{index}].direction must be 'emit' or 'accept'")
+        for field in ("kind", "protocol", "version"):
+            if not _nonempty(record.get(field)):
+                errors.append(f"$.interfaces[{index}].{field} must be non-empty")
+    return errors
+
+
+def detect_surface_drift(
+    surface: dict[str, Any],
+    witness: dict[str, Any],
+    occurrence: str,
+) -> dict[str, Any]:
+    surface_errors = validate_surface(surface)
+    if surface_errors:
+        raise BodyPulseError("invalid body surface:\n" + "\n".join("- " + e for e in surface_errors))
+    witness_errors = validate_owner_interface_witness(witness)
+    if witness_errors:
+        raise BodyPulseError("invalid owner interface witness:\n" + "\n".join("- " + e for e in witness_errors))
+    if witness["owner"] != surface["owner"]:
+        raise BodyPulseError("owner interface witness does not belong to surface owner")
+    if witness["occurrence"] != occurrence:
+        raise BodyPulseError("owner interface witness occurrence does not match snapshot occurrence")
+
+    declared_provides = {_declaration_key(item) for item in surface["provides"]}
+    declared_interfaces = {_interface_key(item) for item in surface["interfaces"]}
+    missing_provides = [
+        copy.deepcopy(item)
+        for item in witness["provides"]
+        if _declaration_key(item) not in declared_provides
+    ]
+    missing_interfaces = [
+        copy.deepcopy(item)
+        for item in witness["interfaces"]
+        if _interface_key(item) not in declared_interfaces
+    ]
+
+    receipt: dict[str, Any] = {
+        "schema": SURFACE_DRIFT_SCHEMA,
+        "world": surface["owner"],
+        "occurrence": occurrence,
+        "status": "drift" if missing_provides or missing_interfaces else "aligned",
+        "surface_digest": _sha256(surface),
+        "owner_witness_digest": _sha256(witness),
+        "missing_provides": _sorted_unique(missing_provides),
+        "missing_interfaces": _sorted_unique(missing_interfaces),
+        "evidence": copy.deepcopy(witness["evidence"]),
+        "authority": "none",
+        "non_promotions": [
+            "owner witness != body declaration",
+            "surface drift != auto-repair",
+            "surface drift != authority transfer",
+            "absence from surface != absence from owner reality",
+        ],
+    }
+    receipt["drift_id"] = _digest("bodydrift", receipt, "drift_id")
+    return receipt
 
 
 def _edge_key(value: dict[str, Any]) -> tuple[str, str, str, str, str]:
@@ -282,8 +402,21 @@ def compose_pulse(charts: list[dict[str, Any]], *, label: str | None = None) -> 
 
 def run_snapshot(path: str | Path) -> dict[str, Any]:
     snapshot, base_dir = load_snapshot(path)
-    charts = derive_snapshot_charts(snapshot, base_dir)
-    return compose_pulse(charts, label=snapshot.get("label"))
+    surface_drift_receipts: list[dict[str, Any]] = []
+    charts = derive_snapshot_charts(
+        snapshot,
+        base_dir,
+        surface_drift_receipts=surface_drift_receipts,
+    )
+    receipt = compose_pulse(charts, label=snapshot.get("label"))
+    if surface_drift_receipts:
+        receipt["surface_drift_receipts"] = _sorted_unique(surface_drift_receipts)
+        receipt["counts"]["surface_drifts"] = sum(
+            1 for item in surface_drift_receipts if item["status"] == "drift"
+        )
+        receipt["non_promotions"].append("surface drift != auto-repair")
+        receipt["pulse_id"] = pulse_id(receipt)
+    return receipt
 
 
 def _dump(value: Any, path: str | None) -> None:

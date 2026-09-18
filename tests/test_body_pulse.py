@@ -102,6 +102,98 @@ class BodyPulseTests(unittest.TestCase):
 
         self.assertTrue(any("authority" in error for error in errors))
 
+    def test_owner_witness_detects_surface_drift_without_repair(self):
+        surface = json.loads(
+            (SNAPSHOT.parent / "3rdi.surface.json").read_text(encoding="utf-8")
+        )
+        before = copy.deepcopy(surface)
+        occurrence = "a" * 40
+        witness = {
+            "schema": "body.owner-interface-witness/v0",
+            "owner": surface["owner"],
+            "occurrence": occurrence,
+            "provides": [
+                {
+                    "kind": "new-owner-output",
+                    "protocol": "owner.output",
+                    "version": "v1",
+                }
+            ],
+            "interfaces": [
+                {
+                    "name": "new-owner-output-out",
+                    "direction": "emit",
+                    "kind": "new-owner-output",
+                    "protocol": "owner.output",
+                    "version": "v1",
+                }
+            ],
+            "evidence": [{"kind": "owner-code", "coordinate": "src/owner.py"}],
+        }
+
+        receipt = body_pulse.detect_surface_drift(surface, witness, occurrence)
+
+        self.assertEqual("drift", receipt["status"])
+        self.assertEqual(1, len(receipt["missing_provides"]))
+        self.assertEqual(1, len(receipt["missing_interfaces"]))
+        self.assertEqual("none", receipt["authority"])
+        self.assertEqual(before, surface)
+        self.assertIn("surface drift != auto-repair", receipt["non_promotions"])
+
+    def test_snapshot_receipts_surface_drift_only_from_occurrence_matched_witness(self):
+        surface = json.loads(
+            (SNAPSHOT.parent / "3rdi.surface.json").read_text(encoding="utf-8")
+        )
+        occurrence = "b" * 40
+        witness = {
+            "schema": "body.owner-interface-witness/v0",
+            "owner": surface["owner"],
+            "occurrence": occurrence,
+            "provides": [
+                {
+                    "kind": "new-owner-output",
+                    "protocol": "owner.output",
+                    "version": "v1",
+                }
+            ],
+            "interfaces": [],
+            "evidence": [{"kind": "owner-test", "coordinate": "test/owner.test.py"}],
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            surface_path = root / "surface.json"
+            witness_path = root / "owner-witness.json"
+            surface_path.write_text(json.dumps(surface), encoding="utf-8")
+            witness_path.write_text(json.dumps(witness), encoding="utf-8")
+            snapshot = {
+                "schema": "body.snapshot/v0",
+                "label": "SURFACE-DRIFT-TEST",
+                "organs": [
+                    {
+                        "surface_path": "surface.json",
+                        "surface_digest": body_pulse._sha256(surface),
+                        "occurrence": occurrence,
+                        "owner_witness_path": "owner-witness.json",
+                        "owner_witness_digest": body_pulse._sha256(witness),
+                    }
+                ],
+            }
+            snapshot_path = root / "snapshot.json"
+            snapshot_path.write_text(json.dumps(snapshot), encoding="utf-8")
+
+            pulse = body_pulse.run_snapshot(snapshot_path)
+            self.assertEqual(1, pulse["counts"]["surface_drifts"])
+            self.assertEqual("drift", pulse["surface_drift_receipts"][0]["status"])
+            self.assertEqual("none", pulse["authority"])
+
+            witness["occurrence"] = "c" * 40
+            witness_path.write_text(json.dumps(witness), encoding="utf-8")
+            snapshot["organs"][0]["owner_witness_digest"] = body_pulse._sha256(witness)
+            snapshot_path.write_text(json.dumps(snapshot), encoding="utf-8")
+            with self.assertRaises(body_pulse.BodyPulseError):
+                body_pulse.run_snapshot(snapshot_path)
+
     def test_occurrence_binding_changes_chart_identity(self):
         surface = json.loads(
             (SNAPSHOT.parent / "3rdi.surface.json").read_text(encoding="utf-8")

@@ -1,0 +1,147 @@
+{
+  "schema": "body.pulse-receipt/v0",
+  "label": "STATIC-COLLECTIVE-BODY-PULSE-001",
+  "charts": [
+    {
+      "chart_id": "bodyc:sha256:2e30c6af3811e2b073feae804866375b665421cfda133961cc6d3a240ded0adc",
+      "occurrence": "e631167a04c6bd1bf95c62cbe5a415994ebb8134",
+      "world": "the-static-collective/3rdi"
+    },
+    {
+      "chart_id": "bodyc:sha256:42d8825dd422fba6284ead0052f3801f853736446eb707f41a1a0374faa8d302",
+      "occurrence": "cad25cdf11f3c617b7120c1b0599589609abbf79",
+      "world": "the-static-collective/ALEX.2"
+    },
+    {
+      "chart_id": "bodyc:sha256:ff28f41f66c74ee68fbfbcaf422ecc587b3b592902dc7e9b5abd8e4a65b2f932",
+      "occurrence": "2869a380efe0b00572a3a2d410289922066d4ef1",
+      "world": "the-static-collective/Dogram"
+    },
+    {
+      "chart_id": "bodyc:sha256:1d66fb41c6d8bdca74b6fe9fd5d4215cacea8323ff8f013339b5312557c76c50",
+      "occurrence": "1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee",
+      "world": "the-static-collective/LOADOUT"
+    },
+    {
+      "chart_id": "bodyc:sha256:05099ca6fd1a0ccde35e91eb1c70dd3af372e604143b9ae8e9de9ede44dc58b8",
+      "occurrence": "105ee68e7acefebd5acf03015389606c96bc5c20",
+      "world": "the-static-collective/free-graph"
+    }
+  ],
+  "pairwise_receipts": [
+    {
+      "left_world": "the-static-collective/3rdi",
+      "receipt_id": "bodyov:sha256:402d4de24736dfac65edc68340fcbae6b392c3dcdbc5d06c8b2737128044d195",
+      "right_world": "the-static-collective/ALEX.2"
+    },
+    {
+      "left_world": "the-static-collective/3rdi",
+      "receipt_id": "bodyov:sha256:054014b6a29d33d86a5302a80b37a6a0b0c45974c2b36058654c21ecde1ccfb4",
+      "right_world": "the-static-collective/Dogram"
+    },
+    {
+      "left_world": "the-static-collective/3rdi",
+      "receipt_id": "bodyov:sha256:4a56e4aac77597e209a2d05426ba2d77403052bed015d9bc937006243555afd1",
+      "right_world": "the-static-collective/LOADOUT"
+    },
+    {
+      "left_world": "the-static-collective/3rdi",
+      "receipt_id": "bodyov:sha256:3b3ecd302c5376cf9d0c5f67839448bbc55d6a379050828b1e742fb1488db493",
+      "right_world": "the-static-collective/free-graph"
+    },
+    {
+      "left_world": "the-static-collective/ALEX.2",
+      "receipt_id": "bodyov:sha256:3f75bcb1d721b997812ccbc9bdbcb9ab2a9abf8a5fb769f6b87c46b8528b3122",
+      "right_world": "the-static-collective/Dogram"
+    },
+    {
+      "left_world": "the-static-collective/ALEX.2",
+      "receipt_id": "bodyov:sha256:b9abfc5a87f0cfc29f5efdfdcb2cd150ead179eb046aca35e1e4f7fe4f055f30",
+      "right_world": "the-static-collective/LOADOUT"
+    },
+    {
+      "left_world": "the-static-collective/ALEX.2",
+      "receipt_id": "bodyov:sha256:0322d81146c2773dca6c41cdc295e0cf4ef4035e5a85f1f11a69b0b3e190b07a",
+      "right_world": "the-static-collective/free-graph"
+    },
+    {
+      "left_world": "the-static-collective/Dogram",
+      "receipt_id": "bodyov:sha256:38090bad06ee33515a90273746a8237bc84a3ac8275ea2fc889f641547f1f244",
+      "right_world": "the-static-collective/LOADOUT"
+    },
+    {
+      "left_world": "the-static-collective/Dogram",
+      "receipt_id": "bodyov:sha256:4cbdd40b1f02ca9b274e0a6bc123a41b2721f80b9ccdfc00653d73573eec0236",
+      "right_world": "the-static-collective/free-graph"
+    },
+    {
+      "left_world": "the-static-collective/LOADOUT",
+      "receipt_id": "bodyov:sha256:67293c4af346f436f478fc6df9952a2e9f26a849ff7f69596361502332b97cdd",
+      "right_world": "the-static-collective/free-graph"
+    }
+  ],
+  "exact_edges": [
+    {
+      "from_world": "the-static-collective/3rdi",
+      "kind": "current-organ-manifest",
+      "protocol": "static-collective/current-organ",
+      "to_world": "the-static-collective/LOADOUT",
+      "version": "v0"
+    },
+    {
+      "from_world": "the-static-collective/ALEX.2",
+      "kind": "current-organ-manifest",
+      "protocol": "static-collective/current-organ",
+      "to_world": "the-static-collective/LOADOUT",
+      "version": "v0"
+    },
+    {
+      "from_world": "the-static-collective/Dogram",
+      "kind": "calculation-receipt",
+      "protocol": "dogram.receipt",
+      "to_world": "the-static-collective/ALEX.2",
+      "version": "v0"
+    }
+  ],
+  "adapter_edges": [],
+  "unmet_needs": [
+    {
+      "kind": "calculation-specimen",
+      "occurrence": "2869a380efe0b00572a3a2d410289922066d4ef1",
+      "protocol": "dogram.specimen",
+      "version": "v0",
+      "world": "the-static-collective/Dogram"
+    },
+    {
+      "kind": "graph-packet",
+      "occurrence": "105ee68e7acefebd5acf03015389606c96bc5c20",
+      "protocol": "free-graph.packet",
+      "version": "v0",
+      "world": "the-static-collective/free-graph"
+    }
+  ],
+  "isolated_charts": [
+    {
+      "occurrence": "105ee68e7acefebd5acf03015389606c96bc5c20",
+      "world": "the-static-collective/free-graph"
+    }
+  ],
+  "counts": {
+    "charts": 5,
+    "pairwise_comparisons": 10,
+    "exact_edges": 3,
+    "adapter_edges": 0,
+    "unmet_needs": 2,
+    "isolated_charts": 1
+  },
+  "authority": "none",
+  "non_promotions": [
+    "pulse != body authority",
+    "edge count != worth",
+    "centrality != canon",
+    "unmet need != command",
+    "candidate overlap != admitted join",
+    "absence from pulse != nonexistence"
+  ],
+  "pulse_id": "bodypulse:sha256:1f412536d6f4dd415ce12ef4040ae144c76b21bdce3d6652877ed2232ef3bb68"
+}

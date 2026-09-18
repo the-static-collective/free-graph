@@ -204,15 +204,16 @@ def compose_pulse(charts: list[dict[str, Any]], *, label: str | None = None) -> 
     exact_edges = _sorted_unique(exact_edges)
     adapter_edges = _sorted_unique(adapter_edges)
 
-    provided_keys = {
-        _declaration_key(item)
-        for chart in charts
-        for item in chart.get("provides", [])
-    }
     unmet_needs: list[dict[str, Any]] = []
     for chart in charts:
+        neighbor_provided_keys = {
+            _declaration_key(item)
+            for provider in charts
+            if provider["owner"]["world"] != chart["owner"]["world"]
+            for item in provider.get("provides", [])
+        }
         for need in chart.get("needs", []):
-            if _declaration_key(need) not in provided_keys:
+            if _declaration_key(need) not in neighbor_provided_keys:
                 unmet_needs.append({
                     "world": chart["owner"]["world"],
                     "occurrence": chart["owner"]["occurrence"],

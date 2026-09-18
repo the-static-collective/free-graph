@@ -1,0 +1,13 @@
+{
+  "schema": "body.snapshot/v0",
+  "label": "STATIC-COLLECTIVE-BODY-PULSE-001",
+  "organs": [
+    {"surface_path":"alex.surface.json","surface_digest":"sha256:bbcbb842810f399d312868e12ea06532afc4d6624f89071c8986954f38ddd4d5","occurrence":"cad25cdf11f3c617b7120c1b0599589609abbf79"},
+    {"surface_path":"3rdi.surface.json","surface_digest":"sha256:b9e1119d2a4968199de4e57bd6f781ba690b6c06e8322b7eed81fa1e76cab507","occurrence":"e631167a04c6bd1bf95c62cbe5a415994ebb8134"},
+    {"surface_path":"dogram.surface.json","surface_digest":"sha256:14e439f4fadd952dd0f4966b20442f91e7ba150e8b6da6c8ce3f1131f8c587c4","occurrence":"2869a380efe0b00572a3a2d410289922066d4ef1"},
+    {"surface_path":"loadout.surface.json","surface_digest":"sha256:20cf1908a553baf97145c436d321e70b868304946e4d8ed5dc7ae32f1c9bd5b3","occurrence":"1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee"},
+    {"surface_path":"free-graph.surface.json","surface_digest":"sha256:df91d90b4900b5cba9b1bc1a606ebc07a839e3236df191ab534b91e824132be2","occurrence":"105ee68e7acefebd5acf03015389606c96bc5c20"}
+  ],
+  "authority":"none",
+  "non_promotions":["snapshot != owner adoption","provisional surface != owner-published contract","occurrence pin != current forever"]
+}

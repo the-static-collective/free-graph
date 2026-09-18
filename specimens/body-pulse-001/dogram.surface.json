@@ -1,0 +1,72 @@
+{
+  "schema": "body.surface/v0",
+  "organ": "dogram",
+  "owner": "the-static-collective/Dogram",
+  "authority": "none",
+  "provides": [
+    {
+      "kind": "calculation-receipt",
+      "protocol": "dogram.receipt",
+      "version": "v0"
+    }
+  ],
+  "needs": [
+    {
+      "kind": "calculation-specimen",
+      "protocol": "dogram.specimen",
+      "version": "v0"
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "specimen-in",
+      "direction": "accept",
+      "kind": "calculation-specimen",
+      "protocol": "dogram.specimen",
+      "version": "v0"
+    },
+    {
+      "name": "receipt-out",
+      "direction": "emit",
+      "kind": "calculation-receipt",
+      "protocol": "dogram.receipt",
+      "version": "v0"
+    }
+  ],
+  "measure": {
+    "declared": [
+      {
+        "dimension": "public-operator-count",
+        "value": 4,
+        "unit": "operators"
+      },
+      {
+        "dimension": "authority-mode",
+        "value": "calculation-only",
+        "unit": "state"
+      }
+    ],
+    "observed": []
+  },
+  "receipts": [
+    {
+      "kind": "github-owner-head",
+      "coordinate": "main",
+      "revision": "2869a380efe0b00572a3a2d410289922066d4ef1"
+    }
+  ],
+  "residual_fog": [
+    "Dogram has no current-organ manifest or owner-published body surface at this occurrence."
+  ],
+  "non_authorities": [
+    "calculation != meaning",
+    "receipt != evidence"
+  ],
+  "evidence": [
+    {
+      "kind": "owner-readme",
+      "coordinate": "README.md",
+      "revision": "2869a380efe0b00572a3a2d410289922066d4ef1"
+    }
+  ]
+}

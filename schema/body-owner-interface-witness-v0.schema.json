@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-static-collective.github.io/free-graph/schema/body-owner-interface-witness-v0.schema.json",
+  "title": "Static Collective Body Owner Interface Witness v0",
+  "type": "object",
+  "required": [
+    "schema",
+    "owner",
+    "occurrence",
+    "provides",
+    "interfaces",
+    "evidence"
+  ],
+  "properties": {
+    "schema": {
+      "const": "body.owner-interface-witness/v0"
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurrence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provides": {
+      "type": "array",
+      "items": {
+        "$ref": "body-surface-v0.schema.json#/$defs/declaration"
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "$ref": "body-surface-v0.schema.json#/$defs/interface"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}

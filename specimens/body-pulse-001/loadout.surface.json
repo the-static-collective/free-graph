@@ -1,0 +1,77 @@
+{
+  "schema": "body.surface/v0",
+  "organ": "loadout",
+  "owner": "the-static-collective/LOADOUT",
+  "authority": "none",
+  "provides": [
+    {
+      "kind": "bounded-world-compile",
+      "protocol": "loadout.compile",
+      "version": "v0"
+    }
+  ],
+  "needs": [
+    {
+      "kind": "current-organ-manifest",
+      "protocol": "static-collective/current-organ",
+      "version": "v0"
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "current-organ-input",
+      "direction": "accept",
+      "kind": "current-organ-manifest",
+      "protocol": "static-collective/current-organ",
+      "version": "v0"
+    },
+    {
+      "name": "compile-out",
+      "direction": "emit",
+      "kind": "bounded-world-compile",
+      "protocol": "loadout.compile",
+      "version": "v0"
+    }
+  ],
+  "measure": {
+    "declared": [
+      {
+        "dimension": "authority-mode",
+        "value": "explicit-gate-required",
+        "unit": "state"
+      },
+      {
+        "dimension": "runtime-network",
+        "value": "none-in-production-resolver",
+        "unit": "class"
+      }
+    ],
+    "observed": []
+  },
+  "receipts": [
+    {
+      "kind": "github-current-organ",
+      "coordinate": ".live/current-organ.json",
+      "revision": "1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee"
+    }
+  ],
+  "residual_fog": [
+    "Owner repo has not yet published body.surface/v0; this is a provisional external projection."
+  ],
+  "non_authorities": [
+    "binding != permission",
+    "receipt != authority"
+  ],
+  "evidence": [
+    {
+      "kind": "owner-readme",
+      "coordinate": "README.md",
+      "revision": "1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee"
+    },
+    {
+      "kind": "current-organ",
+      "coordinate": ".live/current-organ.json",
+      "revision": "1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee"
+    }
+  ]
+}

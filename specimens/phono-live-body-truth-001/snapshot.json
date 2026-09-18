@@ -1,0 +1,16 @@
+{
+  "schema": "body.snapshot/v0",
+  "label": "PHONO-LIVE-BODY-TRUTH-001",
+  "organs": [
+    {
+      "surface_path": "phonograph.surface.json",
+      "surface_digest": "sha256:d6995ca085ed10c4ae6e0351148996ce83d84011d43e9aca5c0360da0f354311",
+      "occurrence": "5b14848079f523c44b2b823d5dcb618bdda00788"
+    },
+    {
+      "surface_path": "static-live.surface.json",
+      "surface_digest": "sha256:2d4576b4f5abbd25cd37fa3a660e46709e99c82b32f7a9664de17ce256aedc3a",
+      "occurrence": "3daa3d150130a090c676fb5422d41652712aa8b7"
+    }
+  ]
+}

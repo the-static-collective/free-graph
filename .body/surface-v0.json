@@ -1,0 +1,84 @@
+{
+  "schema": "body.surface/v0",
+  "organ": "free-graph",
+  "owner": "the-static-collective/free-graph",
+  "publication": {
+    "status": "owner-published",
+    "standard": "static-collective/body-surface/v0",
+    "scope": "interface-declaration"
+  },
+  "provides": [
+    {
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    }
+  ],
+  "needs": [
+    {
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "packet-in",
+      "direction": "accept",
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    },
+    {
+      "name": "packet-out",
+      "direction": "emit",
+      "kind": "graph-packet",
+      "protocol": "free-graph.packet",
+      "version": "v0"
+    }
+  ],
+  "measure": {
+    "declared": [
+      {
+        "dimension": "portable-verb-count",
+        "value": 5,
+        "unit": "verbs"
+      },
+      {
+        "dimension": "authority-mode",
+        "value": "no-promotion",
+        "unit": "state"
+      }
+    ],
+    "observed": []
+  },
+  "receipts": [
+    {
+      "kind": "owner-contract",
+      "coordinate": "docs/contract-v0.md"
+    },
+    {
+      "kind": "owner-grammar",
+      "coordinate": "grammar/relation-v0.md"
+    }
+  ],
+  "residual_fog": [
+    "Neighbor adoption is discovered at pulse time; this surface does not claim any current neighbor."
+  ],
+  "non_authorities": [
+    "graph reachability != truth",
+    "merge != promotion",
+    "surface compatibility != constitutes"
+  ],
+  "evidence": [
+    {
+      "kind": "owner-readme",
+      "coordinate": "README.md"
+    },
+    {
+      "kind": "owner-contract",
+      "coordinate": "docs/contract-v0.md"
+    }
+  ],
+  "authority": "none"
+}

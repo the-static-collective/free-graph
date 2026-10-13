@@ -1,0 +1,74 @@
+name: RELAY-001 Free Graph native sixth organ
+on:
+  push:
+    branches: [experiment/relay001-sia-traversal]
+  pull_request:
+    paths:
+      - 'scripts/relay001_sia.py'
+      - 'tests/test_relay001_sia.py'
+      - '.github/workflows/relay001-sixth.yml'
+      - 'docs/RELAY001-SIA-TRAVERSAL.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-sia-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: All Free Graph tests including adversarial RELAY-001
+        run: python3 -m unittest discover -s tests -v
+      - name: Full native CLI on synthetic SIA fixture
+        run: |
+          python3 - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          spec = importlib.util.spec_from_file_location('synthetic', 'tests/test_relay001_sia.py')
+          mod = importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
+          base=Path('/tmp')/'relay001-sixth-test';base.mkdir(parents=True,exist_ok=True)
+          index,vault,archive = mod.make_fixture(base)
+          print('SYNTHETIC_FIXTURE',index,vault,archive)
+          PY
+          python3 scripts/relay001_sia.py \
+            --sia-index /tmp/relay001-sixth-test/archive/relay-index.json \
+            --vault /tmp/relay001-sixth-test/vault \
+            --packet-root /tmp/relay001-sixth-test/archive \
+            --output /tmp/relay001-sixth-test/synthetic.free-graph.json
+          python3 scripts/fg.py validate /tmp/relay001-sixth-test/synthetic.free-graph.json
+          python3 - <<'PY'
+          import json,subprocess
+          p=json.load(open('/tmp/relay001-sixth-test/synthetic.free-graph.json'))
+          n=next(x['id'] for x in p['nodes'] if x['label']=='Synthetic tone · source')
+          subprocess.run(['python3','scripts/fg.py','neighbors',
+            '/tmp/relay001-sixth-test/synthetic.free-graph.json',n,'--depth','1',
+            '--output','/tmp/relay001-sixth-test/neighborhood.json'],check=True)
+          subprocess.run(['python3','scripts/fg.py','validate',
+            '/tmp/relay001-sixth-test/neighborhood.json'],check=True)
+          subprocess.run(['python3','scripts/fg.py','merge',
+            '/tmp/relay001-sixth-test/synthetic.free-graph.json',
+            '/tmp/relay001-sixth-test/neighborhood.json',
+            '--output','/tmp/relay001-sixth-test/union.json'],check=True)
+          subprocess.run(['python3','scripts/fg.py','validate',
+            '/tmp/relay001-sixth-test/union.json'],check=True)
+          PY
+      - name: Package exact project-owned Free Graph code for local replay
+        run: |
+          tar -czf relay001-freegraph-source.tar.gz \
+            scripts/__init__.py scripts/fg_core.py scripts/fg_ops.py \
+            scripts/fg.py scripts/relay001_sia.py \
+            tests/test_relay001_sia.py docs/RELAY001-SIA-TRAVERSAL.md
+          mkdir -p synthetic-output
+          cp /tmp/relay001-sixth-test/*.json synthetic-output/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: relay001-freegraph-source-carrier
+          path: relay001-freegraph-source.tar.gz
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: relay001-freegraph-synthetic-packets
+          path: synthetic-output/
+          if-no-files-found: error

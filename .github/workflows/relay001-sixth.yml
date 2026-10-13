@@ -28,7 +28,8 @@ jobs:
           from pathlib import Path
           spec = importlib.util.spec_from_file_location('synthetic', 'tests/test_relay001_sia.py')
           mod = importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
-          index,vault,archive = mod.make_fixture(Path('/tmp')/'relay001-sixth-test')
+          base=Path('/tmp')/'relay001-sixth-test';base.mkdir(parents=True,exist_ok=True)
+          index,vault,archive = mod.make_fixture(base)
           print('SYNTHETIC_FIXTURE',index,vault,archive)
           PY
           python3 scripts/relay001_sia.py \

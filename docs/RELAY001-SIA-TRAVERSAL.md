@@ -14,7 +14,7 @@ It uses the unmodified Free Graph v0 contract:
 - **no** \`constitutes\`, owner-local authority, or automatically resolved world heads;
 - native \`rehash_packet(..., stamp=True)\`, \`validate_packet\`, \`neighbors\`, and \`merge_packets\`.
 
-The importer independently re-hashes all six SIA vault objects, compares SIA's five stage records to its index, checks exact parent order, and rejects candidate status inflation. With \`--packet-root\`, it **also** checks bytes for all 13 linked JSON evidence files and the original local MP3. This is **not** a re-execution of GHoT nor a fresh cryptographic verification of the reLATTE crossing. Those already belong to their project-owned interfaces.
+The importer independently re-hashes all six SIA vault objects, compares SIA's five stage records to its index, checks exact parent order, and rejects candidate status inflation. With \`--packet-root\`, it **also** checks bytes for all 12 linked JSON evidence files and the original local MP3. This is **not** a re-execution of GHoT nor a fresh cryptographic verification of the reLATTE crossing. Those already belong to their project-owned interfaces.
 
 ### Native use with your fifth-organ archive
 

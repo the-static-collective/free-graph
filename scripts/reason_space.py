@@ -266,3 +266,75 @@ def lens(packet: dict[str, Any], name: str) -> dict[str, Any]:
     if failures:
         raise PacketError("INVALID_REASON_LENS:\n" + "\n".join(failures))
     return result
+
+
+def pressure(packet: dict[str, Any]) -> dict[str, Any]:
+    """Ask structural research questions from *unresolved claims*, not prose.
+
+    This is neither an evidence adjudicator nor a tool-choice executive.
+    Counting source-path edges never turns them into independent witnesses.
+    """
+    _check(not validate_packet(packet), "INVALID_REASON_PACKET_FOR_PRESSURE")
+    _check(packet.get("extensions", {}).get("reason_space_version") == TRAIL_SCHEMA
+           and packet["modes"] == READ_MODES
+           and packet["task_world_cut"]["status"] == "unresolved",
+           "ONLY_HISTORICAL_REASON_TRAILS_CAN_BE_PRESSURED")
+    claims = [n for n in packet["nodes"]
+              if n.get("extensions", {}).get("reason_role") == "hypothesis"
+              and n["status"] in ("unresolved", "proposed")]
+    results = []
+    for node in sorted(claims, key=lambda x: x["id"]):
+        tests = [l for l in packet["links"]
+                 if l["to"] == node["id"] and l["verb"] == "tests"]
+        bearings = [l for l in packet["links"]
+                    if l["to"] == node["id"] and l["verb"] == "bears-on"]
+        refused = [l for l in bearings if l["bearing"] == "refuses"]
+        supported = [l for l in bearings if l["bearing"] == "supports"]
+        unresolved = [l for l in bearings if l["bearing"] == "unresolved"]
+        # These are observations about graph *records*. Distinct sources,
+        # tests and verdicts must not be counted as independent facts.
+        if supported and refused:
+            gap = "CONFLICTED_RECORDED_BEARINGS"
+            next_question = (
+                "Which independent owner-scoped test could distinguish the "
+                "recorded support from the recorded refusal?"
+            )
+        elif not supported:
+            gap = "NO_RECORDED_SUPPORTING_SPECIMEN"
+            next_question = (
+                "What source-owned, reproducible positive specimen would "
+                "actually support this claim, rather than merely connect to it?"
+            )
+        else:
+            gap = "WARRANT_AND_OWNER_GATE_NOT_ESTABLISHED"
+            next_question = (
+                "Does the relevant source-owning world accept these "
+                "recorded supporting specimens under its own gate?"
+            )
+        results.append({
+            "hypothesis_node_id": node["id"],
+            "historical_label": node["label"],
+            "recorded_probe_edges": len(tests),
+            "recorded_refusals": len(refused),
+            "recorded_supports": len(supported),
+            "recorded_unresolved_bearings": len(unresolved),
+            "source_receipt_ids_not_independent_witness_count": sorted({
+                sid for l in [*tests, *bearings] for sid in l["source_ids"]
+            }),
+            "gap_code": gap,
+            "proposed_next_question": next_question,
+            "claim_became_true": False,
+            "owner_gate_satisfied": False,
+            "tool_dispatch_authorized": False,
+        })
+    return {
+        "schema": "free-graph.reason-pressure/v0",
+        "source_packet_id": packet["packet_id"],
+        "lens": packet["extensions"]["lens"],
+        "status": "STRUCTURAL_QUESTIONS_NOT_DECISIONS",
+        "candidates": results,
+        "method": "bounded explicit graph-edge pattern; no semantic model or inference of source independence",
+        "external_actions": False,
+        "human_review_required": True,
+        "automatic_authority": "NONE",
+    }

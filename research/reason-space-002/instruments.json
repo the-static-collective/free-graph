@@ -1,0 +1,114 @@
+{
+  "schema": "free-graph.inquiry-instruments/v0",
+  "policy": "CATALOG_ONLY_NO_AUTOMATIC_EXECUTION",
+  "source_date": "2026-11-05",
+  "certainty": "SOURCE_IMPLEMENTATIONS_ARE_NOT_GENERAL_ADAPTERS",
+  "instruments": [
+    {
+      "id": "playdeck-validator",
+      "owner": "the-static-collective/playdeck",
+      "operation": "Validate an owner-created rendered full-performance receipt against its own native contract",
+      "mode": "LOCAL_SOURCE_OWNED_CONTRACT",
+      "availability": "BLOCKED_UNTIL_GENUINE_SPECIMEN",
+      "matches": [
+        "no-support",
+        "conflict",
+        "gate"
+      ],
+      "constraints": [
+        "Never invent a rendered performance",
+        "No proof from a proposed plan",
+        "Owner review and original specimen required"
+      ],
+      "evidence": "https://github.com/the-static-collective/playdeck/blob/a7cf718421e767fd382a01894063c3eeba3d2930/packages/receipts/src/validateReceipt.ts"
+    },
+    {
+      "id": "graft-source",
+      "owner": "the-static-collective/GRAFT",
+      "operation": "Inspect public original source and locate previously unexamined test fixtures",
+      "mode": "SOURCE_READ_ONLY",
+      "availability": "REQUIRES_BOUNDED_SOURCE_SELECTION",
+      "matches": [
+        "no-support",
+        "conflict"
+      ],
+      "constraints": [
+        "Search hit is not a validated receipt",
+        "Do not repeat identical frozen source scope and pretend it is new",
+        "Live GitHub requires separate network permission"
+      ],
+      "evidence": "https://github.com/the-static-collective/GRAFT/blob/aa3984d2dbdf949996639b029ca0d95ab6c290e5/src/live-scout.mjs"
+    },
+    {
+      "id": "alex-evidence",
+      "owner": "the-static-collective/ALEX.2",
+      "operation": "Independently evaluate whether an attributable support path exists",
+      "mode": "LOCAL_SOURCE_OWNED_EVALUATION",
+      "availability": "REQUIRES_NEW_EVIDENCE",
+      "matches": [
+        "no-support",
+        "conflict",
+        "gate"
+      ],
+      "constraints": [
+        "Do not treat attention as support",
+        "Rechecking identical evidence is not a novel experiment"
+      ],
+      "evidence": "https://github.com/the-static-collective/ALEX.2/blob/515aea5ac73873300f87dcef2de7492e6e1d58d4/alex_runtime/derivation.py"
+    },
+    {
+      "id": "dogram-graph",
+      "owner": "the-static-collective/Dogram",
+      "operation": "Test graph reachability or counterfactual topology under explicit specimen assumptions",
+      "mode": "LOCAL_MATH_ONLY",
+      "availability": "REQUIRES_GRAPH_QUESTION",
+      "matches": [
+        "conflict"
+      ],
+      "constraints": [
+        "Reachability is not causal or runtime compatibility"
+      ],
+      "evidence": "https://github.com/the-static-collective/Dogram/blob/551b5f9df18f17ec69b452ddcdff01718e0ff771/dogram/engine.py"
+    },
+    {
+      "id": "planz-plan",
+      "owner": "the-static-collective/planZ",
+      "operation": "Plan bounded research steps after the missing evidence and permissions are specified",
+      "mode": "LOCAL_CLASSICAL_PLANNING",
+      "availability": "REQUIRES_ACTION_DEFINITIONS",
+      "matches": [
+        "gate"
+      ],
+      "constraints": [
+        "A planned experiment is not an executed experiment",
+        "Declared cost units are not physical energy"
+      ],
+      "evidence": "https://github.com/the-static-collective/planZ/blob/b4c954c628991acc9d9f41cd42c2b1951bc5855c/scripts/motif-classical.mjs"
+    },
+    {
+      "id": "lsd-divergence",
+      "owner": "UNVERIFIED_EXECUTABLE_REPO",
+      "operation": "Explore alternate hypotheses, frames and hidden assumptions while leaving every novel idea unadmitted",
+      "mode": "HUMAN_REVIEWED_IDEATION_PROFILE_ONLY",
+      "availability": "NOT_CONNECTED_AS_SOURCE_OWNED_EXECUTABLE",
+      "matches": [
+        "no-support",
+        "conflict"
+      ],
+      "constraints": [
+        "Candidate only, never fact",
+        "BREAK → RETURN → RECEIPT",
+        "No silent promotion or authority",
+        "No assumption that an LSD GitHub executable was located"
+      ],
+      "evidence": "https://github.com/the-static-collective/the-daily-slice/blob/23c3d4bf7e4febb89919a3d54b6e8aaf3a764120/slices/2026/08/2026-08-24/reality-bakers.md",
+      "evidence_git_blob": "15f592cdbd8840d8aa1b6dd9088fa4b5259a840c"
+    }
+  ],
+  "permissions": {
+    "auto_network": false,
+    "auto_execution": false,
+    "auto_research_training": false,
+    "auto_gate_admission": false
+  }
+}

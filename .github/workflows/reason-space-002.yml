@@ -1,0 +1,93 @@
+name: Free Graph Reason Space 002 — Historical reusable investigation selection
+
+on:
+  push:
+    branches: [experiment/reason-space-002-selectors-lsd]
+  pull_request:
+    paths:
+      - 'scripts/inquiry_selector.py'
+      - 'scripts/reason_space.py'
+      - 'scripts/motif_reason_bridge.py'
+      - 'scripts/select_motif_next.py'
+      - 'tests/test_inquiry_selector.py'
+      - 'research/reason-space-002/**'
+      - '.github/workflows/reason-space-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selector:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run Free Graph's full regression suite and selector adversarial tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Pin the original MOTIF native court receipt
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 070aba60319cbab3d1c1838ec7481c350e7d86e5
+          path: native-motif
+          persist-credentials: false
+      - name: Pin source-owned LSD profile evidence (not LSD executable)
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/the-daily-slice
+          ref: 23c3d4bf7e4febb89919a3d54b6e8aaf3a764120
+          path: native-slice
+          persist-credentials: false
+      - name: Verify both original public source inputs at exact Git blob
+        run: |
+          test "$(git hash-object native-motif/fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json)" = "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9"
+          test "$(git hash-object native-slice/slices/2026/08/2026-08-24/reality-bakers.md)" = "15f592cdbd8840d8aa1b6dd9088fa4b5259a840c"
+      - name: Actually select a next investigation, with explicit no-source and fresh-source controls
+        run: |
+          mkdir -p /tmp/fg-inquiry
+          REPORT=native-motif/fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json
+          python3 scripts/select_motif_next.py "$REPORT" --ideation --output /tmp/fg-inquiry/held-with-lsd.json
+          python3 scripts/select_motif_next.py "$REPORT" --ideation --new-source-scope --output /tmp/fg-inquiry/new-source-proposed.json
+          python3 scripts/select_motif_next.py "$REPORT" --original-positive-specimen --output /tmp/fg-inquiry/original-specimen-proposed.json
+          python3 scripts/select_motif_next.py "$REPORT" --no-investigation --output /tmp/fg-inquiry/declined.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=Path('/tmp/fg-inquiry')
+          results={name:json.loads((d/(name+'.json')).read_text()) for name in
+            ('held-with-lsd','new-source-proposed','original-specimen-proposed','declined')}
+          first=lambda key:results[key]['claim_candidates'][0]
+          assert results['held-with-lsd']['known_prior_instrument_profiles']==[
+            'alex-evidence','dogram-graph','graft-source','planz-plan']
+          assert first('held-with-lsd')['selected_proposal'] is None
+          assert next(o for o in first('held-with-lsd')['options'] if
+            o['instrument']=='lsd-divergence')['proposal_status']=='HUMAN_ONLY_IDEATION_NOT_EXECUTABLE'
+          assert first('new-source-proposed')['selected_proposal']=='graft-source'
+          assert first('original-specimen-proposed')['selected_proposal']=='playdeck-validator'
+          assert results['declined']['claim_candidates']==[]
+          assert all(x['no_external_actions'] and x['no_automatic_tool_invocations']
+             and x['no_owner_canon_or_authority'] for x in results.values())
+          print('FIRST REAL GRAPH-NATIVE EXPERIMENT SELECTION')
+          print(json.dumps({
+            'prior_instruments':results['held-with-lsd']['known_prior_instrument_profiles'],
+            'unresolved_gap':first('held-with-lsd')['gap_code'],
+            'no_new_source':first('held-with-lsd')['selected_proposal'],
+            'new_public_source_task_cut':first('new-source-proposed')['selected_proposal'],
+            'actual_positive_specimen_declared':first('original-specimen-proposed')['selected_proposal'],
+            'ideation_profile':next(x['proposal_status'] for x in first('held-with-lsd')['options'] if x['instrument']=='lsd-divergence'),
+            'human_decline':results['declined']['status'],
+            'external_actions':False
+          },indent=2))
+          PY
+      - name: Retain source-bounded selection and control packets
+        uses: actions/upload-artifact@v4
+        with:
+          name: fg-inquiry-selector-002-real-historical-controls
+          path: /tmp/fg-inquiry/*.json
+          retention-days: 30

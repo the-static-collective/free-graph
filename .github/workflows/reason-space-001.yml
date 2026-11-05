@@ -50,6 +50,7 @@ jobs:
           import json
           import pathlib
           from scripts.fg_core import validate_packet
+          from scripts.reason_space import pressure
           folder=pathlib.Path("/tmp/reason-space")
           packets={k:json.loads((folder/f"{k}.json").read_text())
                    for k in ("all","evidence","next")}
@@ -67,6 +68,16 @@ jobs:
           assert {n["id"] for n in packets["next"]["nodes"]}.issubset(all_records)
           assert len(all_records)>10
           assert len({p["packet_id"] for p in packets.values()})==3
+          q=pressure(packets["all"])
+          assert q["schema"]=="free-graph.reason-pressure/v0"
+          assert q["status"]=="STRUCTURAL_QUESTIONS_NOT_DECISIONS"
+          assert len(q["candidates"])==1
+          assert q["candidates"][0]["recorded_refusals"]==2
+          assert q["candidates"][0]["recorded_supports"]==0
+          assert q["candidates"][0]["recorded_unresolved_bearings"]==3
+          assert q["candidates"][0]["gap_code"]=="NO_RECORDED_SUPPORTING_SPECIMEN"
+          assert not q["candidates"][0]["tool_dispatch_authorized"]
+          (folder/"pressure.json").write_text(json.dumps(q,indent=2)+"\\n")
           print("REAL FREE GRAPH REASON TRAIL")
           print(json.dumps({
             "packet_ids":{k:v["packet_id"] for k,v in packets.items()},
@@ -78,6 +89,8 @@ jobs:
                          for l in packets["all"]["links"]
                          if l["verb"]=="bears-on"],
             "residual_fog":packets["all"]["residual_fog"],
+            "first_graph_derived_question":q["candidates"][0]["proposed_next_question"],
+            "gap":q["candidates"][0]["gap_code"],
             "authority":"NONE","source_owner_adoption":False,
           },indent=2))
           PY

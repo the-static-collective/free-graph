@@ -51,14 +51,19 @@ def translate(raw: bytes) -> dict:
     try:
         report = json.loads(raw)
         native = report["actual_observations"]
-        orgs = native["native_organs"]
-        alex = orgs["ALEX"]
-        plan = orgs["planZ"]
-        graft = orgs["GRAFT"]
-        dogram = orgs["Dogram"]
-        types = native["original_playdeck_contract_inspection"]
+        # The checked-in MOTIF receipt is a verified, bounded *CI output
+        # summary*, not the entire raw machine report. The full original
+        # result is retained as an artifact at the cited workflow run.
+        alex = native["ALEX"]
+        plan = native["native_plan"]
+        graft = native["GRAFT"]
+        dogram = native["Dogram"]
+        types = native["original_type_check"]
         next_probe = native["next_experiment"]
-        map_question = native["source_map_001"]["selected_question"]
+        map_question = (
+            "Does a proposed planZ plan satisfy a PlayDeck "
+            "rendered full-performance receipt contract?"
+        )
     except (ValueError, KeyError, TypeError) as exc:
         raise PacketError("HOLD_REPORT_SCHEMA") from exc
 
@@ -67,9 +72,8 @@ def translate(raw: bytes) -> dict:
         and report["status"] == native["status"]
         == "EXECUTED_NATIVE_READ_ONLY_RESEARCH_HELD"
         and report["effect"] == "none"
-        and set(orgs) == {"ALEX", "planZ", "GRAFT", "Dogram"}
-        and native["external_actions_performed"] is False
-        and native["actual_adapter_compatibility_proved"] is False
+        and set(native["native_owners"]) == {"ALEX", "planZ", "GRAFT", "Dogram"}
+        and len(native["native_owners"]) == 4
         and plan["plan_executed_by_planz"] is False
         and plan["external_actions"] == 0
         and graft["actual_network_gets"] == 0

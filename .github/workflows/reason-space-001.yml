@@ -1,0 +1,89 @@
+name: Free Graph Reason Space 001 — source-pinned MOTIF historical trail
+
+on:
+  push:
+    branches: [experiment/reason-space-001-motif-trails]
+  pull_request:
+    paths:
+      - 'scripts/reason_space.py'
+      - 'scripts/motif_reason_bridge.py'
+      - 'tests/test_reason_space.py'
+      - '.github/workflows/reason-space-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  historical-reason-space:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run existing source-owner Free Graph tests and new trajectory controls
+        run: python3 -m unittest discover -s tests -v
+      - name: Checkout exact original public MOTIF native-court historical receipt
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 070aba60319cbab3d1c1838ec7481c350e7d86e5
+          path: native-motif
+          persist-credentials: false
+      - name: Verify MOTIF original immutable report bytes
+        run: |
+          test "$(git hash-object native-motif/fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json)" = "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9"
+      - name: Convert original four-native-organ investigation into three real Free Graph v0 projections
+        run: |
+          mkdir -p /tmp/reason-space
+          python3 scripts/motif_reason_bridge.py native-motif/fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json --lens all --output /tmp/reason-space/all.json
+          python3 scripts/motif_reason_bridge.py native-motif/fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json --lens evidence --output /tmp/reason-space/evidence.json
+          python3 scripts/motif_reason_bridge.py native-motif/fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json --lens next --output /tmp/reason-space/next.json
+          for view in all evidence next; do
+            python3 scripts/fg.py validate /tmp/reason-space/$view.json
+          done
+          python3 - <<'PY'
+          import json
+          import pathlib
+          from scripts.fg_core import validate_packet
+          folder=pathlib.Path("/tmp/reason-space")
+          packets={k:json.loads((folder/f"{k}.json").read_text())
+                   for k in ("all","evidence","next")}
+          for name,p in packets.items():
+            assert not validate_packet(p), name
+            assert p["schema"]=="free-graph.packet/v0"
+            assert p["modes"]==["re-enter"]
+            assert p["task_world_cut"]["status"]=="unresolved"
+            assert p["extensions"]["owner_approval_implied"] is False
+            assert not any(l["verb"]=="constitutes" for l in p["links"])
+            assert all(l["authority"]=="none" for l in p["links"])
+            assert not any(n["status"]=="locally-adopted" for n in p["nodes"])
+          all_records={n["id"] for n in packets["all"]["nodes"]}
+          assert {n["id"] for n in packets["evidence"]["nodes"]}.issubset(all_records)
+          assert {n["id"] for n in packets["next"]["nodes"]}.issubset(all_records)
+          assert len(all_records)>10
+          assert len({p["packet_id"] for p in packets.values()})==3
+          print("REAL FREE GRAPH REASON TRAIL")
+          print(json.dumps({
+            "packet_ids":{k:v["packet_id"] for k,v in packets.items()},
+            "record_counts":{k:{"nodes":len(v["nodes"]),"links":len(v["links"]),
+                                 "sources":len(v["sources"])}
+                             for k,v in packets.items()},
+            "bearings":[{"bearing":l.get("bearing"),
+                          "qualifier":l["qualifier"]}
+                         for l in packets["all"]["links"]
+                         if l["verb"]=="bears-on"],
+            "residual_fog":packets["all"]["residual_fog"],
+            "authority":"NONE","source_owner_adoption":False,
+          },indent=2))
+          PY
+      - name: Preserve three original content-addressed Free Graph projections
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-graph-reason-space-001-motif-historical-projections
+          path: /tmp/reason-space/*.json
+          retention-days: 30

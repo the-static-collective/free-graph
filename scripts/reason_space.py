@@ -29,6 +29,8 @@ ROLES = {
     "finding": "receipt",
     "next": "question",
 }
+INSTRUMENTS = {"alex-evidence", "graft-source", "dogram-graph",
+               "planz-plan", "playdeck-validator", "lsd-divergence"}
 STATUSES = {"proposed", "unresolved", "observed", "tested", "refused", "supported"}
 VERBS = {"connects", "descends-from", "tests", "bears-on"}
 LENSES = {
@@ -120,8 +122,15 @@ def convert(trail: dict[str, Any]) -> dict[str, Any]:
     output_nodes: list[dict] = []
     event_to_node: dict[str, dict] = {}
     for event in events:
-        _key(event, {"key", "role", "label", "status", "sources"})
+        _check(isinstance(event, dict) and
+               set(event) in (
+                   {"key", "role", "label", "status", "sources"},
+                   {"key", "role", "label", "status", "sources", "instrument"},
+               ), "UNEXPECTED_REASON_EVENT_FIELDS")
         key, role = event["key"], event["role"]
+        if "instrument" in event:
+            _check(role == "probe" and event["instrument"] in INSTRUMENTS,
+                   "INVALID_EXPLICIT_INSTRUMENT")
         _check(isinstance(key, str) and KEY.fullmatch(key)
                and key not in event_to_node and role in ROLES
                and _name(event["label"])
@@ -140,6 +149,8 @@ def convert(trail: dict[str, Any]) -> dict[str, Any]:
                 "workspace_id": trail["id"],
             },
         }
+        if "instrument" in event:
+            node["extensions"]["instrument"] = event["instrument"]
         if role == "hypothesis":
             node["claim_class"] = "inferential"
             node["witness_requirement"] = "owner-defined"

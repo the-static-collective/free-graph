@@ -65,3 +65,17 @@ Local contract tests exercise data tampering, source/branch spoofing, unauthoriz
 **What this does NOT prove:** generic autonomous tool selection, unrestricted repository discovery, genuine independent causal understanding or automatic adaptation. These require new experiments with separately authored unseen tasks. This project supplies a small, reusable, source-conscious *representation of reasoning journeys*, and the first working conversion of an actual MOTIF investigation.
 
 **Principle:** The same source may be inspected through many lawful lenses; selecting a lens does not change its history, evidence quality, currentness, or authority.
+
+## Actual graph-native question pressure
+
+The portable representation also supports an **executable structural inquiry**: `scripts.reason_space.pressure(packet)`. It inspects *only* verified Free Graph v0 records and their existing `tests` and `bears-on` links to an unresolved `hypothesis` node.
+
+It distinguishes three classes of historical gap:
+
+- `NO_RECORDED_SUPPORTING_SPECIMEN`: no supporting `bears-on` edge has been recorded. Ask which **source-owned positive specimen** would genuinely discriminate the hypothesis.
+- `CONFLICTED_RECORDED_BEARINGS`: both `supports` and `refuses` appear. Ask which **independent test** could distinguish them, without treating count or URL separation as independent evidence.
+- `WARRANT_AND_OWNER_GATE_NOT_ESTABLISHED`: recorded support without refusal still needs **original owner review**; a graph finding is not project canon.
+
+The query returns `free-graph.reason-pressure/v0` with stable original claim IDs, recorded edge counts, source IDs and a suggested question. The query does **not** execute its proposed test, decide truth, promote a claim or spend resources. It does not infer source independence, causal truth or partner consent. Rotating the evidence/next lens cannot change the original records or create new authority.
+
+The first real MOTIF MAP-002 record has **five historical bearings** on one hypothesized compatibility claim: **two `refuses`, three `unresolved`, zero `supports`**. The abstract query therefore asks for a genuine independently witnessed positive specimen, rather than mistaking GRAFT source references or a Dogram hypothetical path for proof. This is a bounded structural rule applied to actual source-owned experimental receipts—not a learned general investigative policy.

@@ -128,6 +128,7 @@ def translate(raw: bytes) -> dict:
                   "can count as a rendered PlayDeck performance receipt",
          "status": "unresolved", "sources": ["motif-run"]},
         {"key": "plan-probe", "role": "probe",
+         "instrument": "planz-plan",
          "label": f"Native planZ classical planner: {len(plan['actions'])} "
                   f"hypothetical research steps, declared cost "
                   f"{plan['declared_example_cost']}",
@@ -136,6 +137,7 @@ def translate(raw: bytes) -> dict:
          "label": "A planned test is not an executed external step",
          "status": "observed", "sources": ["motif-run"]},
         {"key": "alex-probe", "role": "probe",
+         "instrument": "alex-evidence",
          "label": "ALEX asks whether a retrieved source establishes "
                   "an attributable SUPPORTS relation",
          "status": "tested", "sources": ["motif-run"]},
@@ -143,6 +145,7 @@ def translate(raw: bytes) -> dict:
          "label": "ALEX: REFUSE / ATTENTION_NOT_SUPPORT",
          "status": "refused", "sources": ["motif-run"]},
         {"key": "dogram-probe", "role": "probe",
+         "instrument": "dogram-graph",
          "label": "Dogram checks reachability before and after an explicitly "
                   "hypothetical graph edge",
          "status": "tested", "sources": ["motif-run"]},
@@ -151,6 +154,7 @@ def translate(raw: bytes) -> dict:
                   "software compatibility remains unproved",
          "status": "unresolved", "sources": ["motif-run"]},
         {"key": "graft-probe", "role": "probe",
+         "instrument": "graft-source",
          "label": "GRAFT's native public source scout in offline API replay",
          "status": "tested", "sources": ["motif-run", "source-doc-1",
                                        "source-doc-2"]},

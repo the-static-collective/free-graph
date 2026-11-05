@@ -6,7 +6,7 @@ from pathlib import Path
 import unittest
 
 from scripts.fg_core import PacketError, validate_packet, packet_id
-from scripts.reason_space import TRAIL_SCHEMA, convert, lens
+from scripts.reason_space import TRAIL_SCHEMA, convert, lens, pressure
 from scripts.motif_reason_bridge import build, MOTIF_BLOB, git_blob
 
 REV="0"*40
@@ -151,6 +151,49 @@ class ReasonSpaceTests(unittest.TestCase):
   with self.assertRaisesRegex(PacketError,"HOLD_MOTIF_REPORT_BLOB"):
    build(b"{}")
   self.assertEqual(len(MOTIF_BLOB),40)
+ def test_structural_reason_pressure_not_proof_or_runtime_permission(self):
+  p=convert(sample())
+  response=pressure(p)
+  self.assertEqual(response["schema"],"free-graph.reason-pressure/v0")
+  self.assertEqual(response["source_packet_id"],p["packet_id"])
+  self.assertEqual(response["status"],"STRUCTURAL_QUESTIONS_NOT_DECISIONS")
+  self.assertEqual(len(response["candidates"]),1)
+  claim=response["candidates"][0]
+  self.assertEqual(claim["gap_code"],"NO_RECORDED_SUPPORTING_SPECIMEN")
+  self.assertEqual(claim["recorded_probe_edges"],1)
+  self.assertEqual(claim["recorded_refusals"],1)
+  self.assertEqual(claim["recorded_supports"],0)
+  self.assertFalse(claim["tool_dispatch_authorized"])
+  self.assertFalse(claim["owner_gate_satisfied"])
+  self.assertFalse(response["external_actions"])
+ def test_conflict_pressure_changes_question_not_historical_identity(self):
+  t=sample()
+  t["relations"].append({
+   "from":"t","to":"h","verb":"bears-on",
+   "qualifier":"a second supporting view with unclear independence",
+   "status":"supported","sources":["receipt"],"bearing":"supports"
+  })
+  p=convert(t)
+  result=pressure(p)["candidates"][0]
+  self.assertEqual(result["gap_code"],"CONFLICTED_RECORDED_BEARINGS")
+  self.assertEqual(result["recorded_supports"],1)
+  self.assertEqual(result["recorded_refusals"],1)
+  self.assertFalse(result["claim_became_true"])
+  self.assertFalse(result["owner_gate_satisfied"])
+ def test_lens_rotation_keeps_pressure_non_authoritative(self):
+  p=convert(sample())
+  next_view=lens(p,"next")
+  x=pressure(next_view)
+  self.assertEqual(x["source_packet_id"],next_view["packet_id"])
+  self.assertEqual(x["status"],"STRUCTURAL_QUESTIONS_NOT_DECISIONS")
+  self.assertEqual(x["candidates"],[])
+ def test_no_global_nonreason_packet_pressure(self):
+  p=convert(sample())
+  p["extensions"]["reason_space_version"]="untrusted"
+  p.pop("packet_id")
+  p["packet_id"]=packet_id(p)
+  with self.assertRaisesRegex(PacketError,"ONLY_HISTORICAL_REASON_TRAILS"):
+   pressure(p)
 
 if __name__=="__main__":
  unittest.main()
